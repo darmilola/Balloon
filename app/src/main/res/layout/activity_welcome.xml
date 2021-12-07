@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Welcome"
+    android:background="#9C0830">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="4">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1.2"
+            android:visibility="invisible"
+            android:id="@+id/welcome_marketing_layout"
+            android:gravity="center|left">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:textSize="25dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="30dp"
+                android:lineSpacingExtra="7dp"
+                android:fontFamily="@font/roannecondmed"
+                android:text="Imagine everyone on the internet saying things to"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="80dp"
+                android:textSize="25dp"
+                android:textColor="@color/yellow"
+                android:layout_marginLeft="30dp"
+                android:lineSpacingExtra="7dp"
+                android:fontFamily="@font/roannecondmed"
+                android:text="Popularize your music"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="2">
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="300dp"
+                android:src="@drawable/man_g8432c2762_640"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:visibility="invisible"
+            android:id="@+id/welcome_get_started_layout"
+            android:layout_weight="0.8">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom"
+                android:backgroundTint="@color/white"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Go On"
+                android:textAllCaps="false"
+                android:textSize="16dp"
+                android:id="@+id/welcome_go_on"
+                android:textColor="@color/balloon_primary"
+                android:layout_marginRight="20dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
