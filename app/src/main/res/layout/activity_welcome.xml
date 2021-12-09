@@ -15,59 +15,65 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:background="#ff6633"
             android:visibility="invisible"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/welcome_marketing_layout"
             android:gravity="center|left">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:textSize="27dp"
+                android:layout_marginRight="20dp"
+                android:textSize="22dp"
                 android:textColor="@color/white"
-                android:gravity="center"
-                android:layout_marginLeft="30dp"
-                android:fontFamily="@font/groblack"
-                android:text="Imagine everyone on the internet saying things to popularize you Music"/>
+                android:gravity="center|left"
+                android:layout_marginLeft="20dp"
+                android:textFontWeight="600"
+                android:id="@+id/welcome_header"
+                android:fontFamily="@font/grobold"
+                android:text="Imagine everyone on the\n internet doing or saying things\n to popularize you music..."/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:layout_weight="3"
+            android:layout_weight="2.7"
             android:weightSum="0.8"
             android:background="@drawable/balloon_illust__1_">
 
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                android:gravity="bottom"
+                android:gravity="top"
                 android:visibility="invisible"
                 android:id="@+id/welcome_get_started_layout"
-                android:layout_weight="0.8">
+                android:layout_weight="0.5">
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="bottom"
                     android:backgroundTint="@color/white"
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="20dp"
-                    android:text="Go On"
+                    android:text="Continue..."
+                    app:elevation="20dp"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="@font/grobold"
                     android:textAllCaps="false"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:id="@+id/welcome_go_on"
                     android:textColor="@color/balloon_primary"
                     android:layout_marginRight="20dp"/>
             </LinearLayout>
 
-        </LinearLayout>
+
 
 
 

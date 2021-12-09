@@ -12,6 +12,15 @@ import android.widget.LinearLayout
 import android.view.View
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.button.MaterialButton
+import android.text.Spannable
+
+
+import androidx.core.content.ContextCompat
+
+import android.text.style.ForegroundColorSpan
+
+import android.text.SpannableString
+import android.widget.TextView
 
 
 @Suppress("DEPRECATION")
@@ -19,6 +28,7 @@ class Welcome : AppCompatActivity() {
     private lateinit var getStartedLayout: LinearLayout
     private lateinit var marketingLayout: LinearLayout
     private lateinit var goOn: MaterialButton
+    private lateinit var header: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
@@ -26,12 +36,28 @@ class Welcome : AppCompatActivity() {
     }
 
     fun initView() {
+
+
+        header = findViewById(R.id.welcome_header);
+
+        val headerSpan: Spannable = SpannableString("Imagine everyone on the\ninternet doing or saying things\nto popularize you music...")
+        headerSpan.setSpan(
+            ForegroundColorSpan(
+                ContextCompat.getColor(
+                    this,
+                    R.color.yellow
+                )
+            ), 59, 69, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        header.setText(headerSpan)
+
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         getStartedLayout = findViewById(R.id.welcome_get_started_layout)
         marketingLayout = findViewById(R.id.welcome_marketing_layout);
+        header = findViewById(R.id.welcome_header)
         goOn = findViewById(R.id.welcome_go_on)
         val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
         val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fast_fadein)
