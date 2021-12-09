@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.view.View
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.button.MaterialButton
 
 
@@ -33,14 +34,17 @@ class Welcome : AppCompatActivity() {
         marketingLayout = findViewById(R.id.welcome_marketing_layout);
         goOn = findViewById(R.id.welcome_go_on)
         val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
-        val slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down)
+        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fast_fadein)
+        val slideFromLeft = AnimationUtils.loadAnimation(this, R.anim.fast_fadein)
 
         if (marketingLayout.getVisibility() === View.INVISIBLE) {
             marketingLayout.setVisibility(View.VISIBLE)
-            marketingLayout.startAnimation(slideDown)
+            marketingLayout.startAnimation(fadeIn)
         }
 
-        slideDown.setAnimationListener(object : Animation.AnimationListener {
+
+
+        fadeIn.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
             override fun onAnimationEnd(animation: Animation) {
                 if (getStartedLayout.getVisibility() === View.INVISIBLE) {
