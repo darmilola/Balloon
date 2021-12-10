@@ -51,10 +51,6 @@ class Welcome : AppCompatActivity() {
         )
         header.setText(headerSpan)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         getStartedLayout = findViewById(R.id.welcome_get_started_layout)
         marketingLayout = findViewById(R.id.welcome_marketing_layout);
         header = findViewById(R.id.welcome_header)

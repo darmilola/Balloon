@@ -11,6 +11,9 @@
         android:testOnly="false"
         android:theme="@style/Theme.Balloon">
         <activity
+            android:name=".LoginOrSignup"
+            android:exported="false" />
+        <activity
             android:name=".SecondWelcome"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

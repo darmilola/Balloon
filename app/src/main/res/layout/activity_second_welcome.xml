@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/balloon_primary"
+    android:background="#ff6633"
     tools:context=".Welcome">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:background="@drawable/balloon_illust_2">
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:elevation="1dp"
         android:weightSum="4">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
             android:layout_weight="1.2"
-            android:id="@+id/welcome_marketing_layout"
+            android:background="#ff6633"
+            android:layout_marginTop="20dp"
             android:gravity="center|left">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="60dp"
-                android:textSize="20dp"
-                android:id="@+id/welcome_second_line1"
-                android:textColor="@color/white"
-                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:textSize="22dp"
                 android:visibility="gone"
-                android:gravity="center"
-                android:fontFamily="@font/groblack"
-                android:text="We strongly believe you are talented and you deserve to blow. And that is why we have launched balloon to make it easy for you to blow"/>
+                android:textColor="@color/white"
+                android:gravity="center|left"
+                android:layout_marginLeft="20dp"
+                android:textFontWeight="600"
+                android:id="@+id/second_welcome_header_1"
+                android:fontFamily="@font/grobold"
+                android:text="We strongly believe that you\n are talented and that you deserve to\n blow. And that is why we have\n launched Balloon."/>
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:textSize="25dp"
-                android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/welcome_second_line2"
+                android:layout_marginRight="20dp"
+                android:textSize="22dp"
                 android:visibility="gone"
-                android:fontFamily="@font/groblack"
-                android:text="Hire Envangelists on balloon to do or say anything to popularize your music."/>
+                android:textColor="@color/white"
+                android:gravity="center|left"
+                android:layout_marginLeft="20dp"
+                android:textFontWeight="600"
+                android:id="@+id/second_welcome_header_2"
+                android:fontFamily="@font/grobold"
+                android:text="The way it works is that\n it connects you to people\n (Evangelists) who are willing to\n do or say anything to\n popularize your music..."/>
+
 
         </LinearLayout>
 
@@ -61,50 +56,43 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1.8">
+            android:layout_weight="2.8"
+            android:weightSum="0.8"
+            android:background="@drawable/balloon_illust_2__1_">
 
 
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="bottom"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/welcome_get_started_layout"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:textSize="21dp"
-                android:textColor="@color/white"
-                android:id="@+id/welcome_second_line3"
-                android:layout_marginLeft="30dp"
-                android:gravity="center"
-                android:visibility="gone"
-                android:fontFamily="@font/groblack"
-                android:text="The way it works is that it connects you to people(Evangelists) who are willing to do or say anything to popularize your music."/>
-
+            android:layout_gravity="bottom"
+            android:visibility="invisible"
+            android:id="@+id/second_welcome_get_started_layout">
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom"
                 android:backgroundTint="@color/white"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
-                android:visibility="gone"
                 android:text="Get Started"
+                app:elevation="20dp"
+                android:letterSpacing="0.05"
+                android:fontFamily="@font/grobold"
                 android:textAllCaps="false"
-                android:id="@+id/welcome_second_getstarted_button"
-                android:textSize="16dp"
+                android:textSize="14dp"
+                android:id="@+id/welcome_getstarted_button"
                 android:textColor="@color/balloon_primary"
                 android:layout_marginRight="20dp"/>
         </LinearLayout>
 
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>
