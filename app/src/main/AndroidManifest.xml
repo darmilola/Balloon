@@ -11,6 +11,12 @@
         android:testOnly="false"
         android:theme="@style/Theme.Balloon">
         <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
             android:name=".LoginOrSignup"
             android:exported="false" />
         <activity

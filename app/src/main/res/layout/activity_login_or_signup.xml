@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Welcome">
 
     <FrameLayout
@@ -64,7 +65,7 @@
                 android:textAllCaps="false"
                 android:textSize="14dp"
                 app:backgroundTint="@color/balloon_primary"
-                android:id="@+id/welcome_go_on"
+                android:id="@+id/login_or_signup_signup"
                 android:textColor="@color/white"
                 android:layout_marginRight="20dp"/>
             <com.google.android.material.button.MaterialButton
@@ -75,6 +76,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:text="Login"
+                android:id="@+id/login_or_signup_login"
                 app:elevation="40dp"
                 android:letterSpacing="0.05"
                 android:fontFamily="@font/grobold"

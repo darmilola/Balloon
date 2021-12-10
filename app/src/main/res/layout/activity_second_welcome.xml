@@ -60,36 +60,6 @@
             android:weightSum="0.8"
             android:background="@drawable/balloon_illust_2__1_">
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="bottom"
-            android:layout_gravity="bottom"
-            android:visibility="invisible"
-            android:id="@+id/second_welcome_get_started_layout">
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom"
-                android:backgroundTint="@color/white"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="Get Started"
-                app:elevation="20dp"
-                android:letterSpacing="0.05"
-                android:fontFamily="@font/grobold"
-                android:textAllCaps="false"
-                android:textSize="14dp"
-                android:id="@+id/welcome_getstarted_button"
-                android:textColor="@color/balloon_primary"
-                android:layout_marginRight="20dp"/>
-        </LinearLayout>
-
-
         </LinearLayout>
 
 

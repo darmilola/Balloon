@@ -40,6 +40,7 @@ class Welcome : AppCompatActivity() {
 
         header = findViewById(R.id.welcome_header);
 
+
         val headerSpan: Spannable = SpannableString("Imagine everyone on the\ninternet doing or saying things\nto popularize you music...")
         headerSpan.setSpan(
             ForegroundColorSpan(
@@ -81,6 +82,8 @@ class Welcome : AppCompatActivity() {
             val intent = Intent(this, SecondWelcome::class.java)
             startActivity(intent)
         }
+
+
 
 
     }

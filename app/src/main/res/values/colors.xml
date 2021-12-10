@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="balloon_primary">#ff6633</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -9,4 +9,32 @@
     <color name="white">#FFFFFFFF</color>
     <color name="less_white">#f5f5f5</color>
     <color name="yellow">#F8EC16</color>
+    <color name="White">#ffffff</color>
+    <color name="grey">#60000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="new_dark_text_color">#0C0C0C</color>
+    <color name="hintcolor">#c8c8c8</color>
+    <color name="lighter_text_color">#B9B9B9</color>
+    <color name="next_color">#C81B63</color>
+    <color name="this_week_color">#FACE6719</color>
+    <color name="proposed_color">#FA0FA1B4</color>
+    <color name="pinkypinky">#fa2d65 </color>
+    <color name="light_blue">#D9F4FD</color>
+    <color name="dark_text_color">#3C3A3A</color>
+    <color name="light_text_color">#7A7A7A</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:ignore="PrivateResource">#c8c8c8</color>
+    <color name="hashtag_color">#FF2196F3</color>
+    <color name="mention_color">#fa2d65</color>
+    <color name="light_primary">#FDF9FD</color>
+    <color name="green">#FF1ED585</color>
+    <color name="toolbar_light_primary">#F8E7DFFD</color>
+    <color name="semi_light_primary">#284A154B</color>
+    <color name="white_transparency">#D9FFFFFF</color>
+    <color name="blue">#465ED3</color>
+    <color name="special_activity_background">#f4f4f4</color>
+    <color name="white60">#a0ffffff</color>
+    <color name="white_two">#efefef</color>
+    <color name="white_three">#ebebeb</color>
+    <color name="white_four">#e0e0e0</color>
+    <color name="white_five">#dadada</color>
 </resources>

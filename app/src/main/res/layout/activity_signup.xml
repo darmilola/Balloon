@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/login_gradient"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:padding="25dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sign_up_firstname_layout"
+                        style="@style/NewRegisterTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        app:boxStrokeColor="@color/balloon_primary"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/sign_up_firstname"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:hint="Firstname"
+                            android:maxLength="160"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textSize="17dp"
+                            android:textColor="@color/balloon_primary"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sign_up_lastname_layout"
+                        style="@style/NewRegisterTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        app:boxStrokeColor="@color/balloon_primary"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/sign_up_lastname"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:hint="Lastname"
+                            android:maxLength="160"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textSize="17dp"
+                            android:textColor="@color/balloon_primary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sign_up_email_layout"
+                        style="@style/NewRegisterTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        app:boxStrokeColor="@color/balloon_primary"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/sign_up_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:hint="Email"
+                            android:maxLength="160"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textSize="17dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sign_up_password_layout"
+                        style="@style/NewRegisterTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        app:boxStrokeColor="@color/balloon_primary"
+                        app:errorEnabled="true"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/balloon_primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/sign_up_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:hint="Password"
+                            android:maxLength="160"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:textSize="17dp"
+                            android:textColor="@color/balloon_primary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/sign_up_confirm_password_layout"
+                        style="@style/NewRegisterTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        app:boxStrokeColor="@color/balloon_primary"
+                        app:errorEnabled="true"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/balloon_primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/sign_up_confirm_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:hint="Confirm Password"
+                            android:maxLength="160"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:textSize="17dp"
+                            android:textColor="@color/balloon_primary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Sign up"
+                        android:fontFamily="@font/grobold"
+                        android:backgroundTint="@color/balloon_primary"
+                        android:id="@+id/signup_with_email_button"
+                        android:textAllCaps="false"
+                        android:letterSpacing="0.05"
+                        android:textSize="14dp"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="already have account? Log In"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:padding="5dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/grobold"
+                        android:id="@+id/sign_up_have_account"
+                        android:textColor="@color/balloon_primary"/>
+                </LinearLayout>
+
+            </ScrollView>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>
