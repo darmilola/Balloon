@@ -105,6 +105,7 @@ class SecondWelcome : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
         })
 
+
         fadeOut2.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
             override fun onAnimationEnd(animation: Animation) {
@@ -119,4 +120,5 @@ class SecondWelcome : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
         })
     }
+
 }
