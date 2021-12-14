@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="SignupViewModel"
+            type="com.useballoon.viewModels.SignupViewModel" />
+    </data>
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_gradient"
     android:orientation="vertical">
     <ScrollView
@@ -45,7 +54,11 @@
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             android:paddingLeft="10dp"
+                            android:text="@={SignupViewModel.firstname}"
                             android:hint="Firstname"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/signup_firstname"
                             android:layout_marginRight="5dp"
                             android:fontFamily="@font/gromed"
                             android:textSize="17dp"
@@ -58,9 +71,13 @@
                             android:layout_weight="1"
                             android:hint="Lastname"
                             android:paddingLeft="10dp"
+                            android:text="@={SignupViewModel.lastname}"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/gromed"
                             android:textSize="17dp"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/signup_lastname"
                             android:background="@drawable/auth_edittext_background"/>
                     </LinearLayout>
                     <EditText
@@ -68,9 +85,13 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:hint="Email"
+                        android:text="@={SignupViewModel.email}"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/gromed"
                         android:textSize="17dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:id="@+id/signup_email"
                         android:background="@drawable/auth_edittext_background"/>
 
 
@@ -86,13 +107,14 @@
                         android:layout_marginTop="10dp">
 
                         <EditText
-                            android:id="@+id/etPassword"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:hint="Password"
+                            android:text="@={SignupViewModel.password}"
                             android:fontFamily="@font/gromed"
                             android:textSize="17dp"
                             android:paddingTop="10dp"
+                            android:id="@+id/signup_password"
                             android:background="@drawable/auth_edittext_background"
                             android:inputType="textPassword"
                             android:maxLines="1" />
@@ -108,12 +130,13 @@
                         android:layout_marginTop="10dp">
 
                         <EditText
-                            android:id="@+id/etPassword"
+                            android:id="@+id/signup_password_confirm"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:hint="Confirm password"
                             android:paddingTop="10dp"
                             android:fontFamily="@font/gromed"
+                            android:text="@={SignupViewModel.confirmPassword}"
                             android:textSize="17dp"
                             android:background="@drawable/auth_edittext_background"
                             android:inputType="textPassword"
@@ -129,22 +152,13 @@
                         android:paddingLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/gromed"
+                        android:id="@+id/signup_phone"
                         android:textSize="17dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:text="@={SignupViewModel.phonenumber}"
                         android:background="@drawable/auth_edittext_background"/>
 
-
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Login"
-                        android:fontFamily="@font/grobold"
-                        android:letterSpacing="0.005"
-                        android:backgroundTint="@color/balloon_primary"
-                        android:id="@+id/login_with_email_button"
-                        android:textAllCaps="false"
-                        android:textSize="15dp"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -166,8 +180,10 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:text="Register"
+                        android:id="@+id/signup_register_button"
                         android:fontFamily="@font/grobold"
                         android:letterSpacing="0.005"
+                        android:onClick="@{(v) -> SignupViewModel.onClick(v)}"
                         android:backgroundTint="#00a400"
                         android:textAllCaps="false"
                         android:textSize="15dp"/>
@@ -177,4 +193,5 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
+</layout>
 

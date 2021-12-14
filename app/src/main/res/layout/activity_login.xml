@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="LoginViewModel"
+            type="com.useballoon.viewModels.LoginViewModel" />
+    </data>
+
+ <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_gradient"
     android:orientation="vertical">
     <ScrollView
@@ -75,6 +84,10 @@
                     android:paddingLeft="10dp"
                     android:fontFamily="@font/gromed"
                     android:textSize="17dp"
+                    android:text="@={LoginViewModel.email}"
+                    android:id="@+id/login_email"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:background="@drawable/auth_edittext_background"/>
 
 
@@ -109,9 +122,11 @@
                     app:boxBackgroundMode="none">
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/etPassword"
+                        android:id="@+id/login_password"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:paddingTop="10dp"
+                        android:text="@={LoginViewModel.password}"
                         android:background="@drawable/auth_edittext_background"
                         android:inputType="textPassword"
                         android:maxLines="1" />
@@ -126,6 +141,7 @@
                     android:text="Login"
                     android:fontFamily="@font/grobold"
                     android:letterSpacing="0.005"
+                    android:onClick="@{(v) -> LoginViewModel.onClick(v)}"
                     android:backgroundTint="@color/balloon_primary"
                     android:id="@+id/login_with_email_button"
                     android:textAllCaps="false"
@@ -190,4 +206,6 @@
     </LinearLayout>
 </ScrollView>
 </LinearLayout>
+</layout>
+
 
