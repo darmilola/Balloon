@@ -16,30 +16,31 @@ public class SignupUser {
     @SerializedName("password")
     private String password;
 
-    private transient String confirmPassword;
+    @SerializedName("keynode")
+    private int keynode;
 
-    @SerializedName("phonenumber")
-    private String phonenumber;
+    private transient String confirmPassword;
 
     private transient boolean isLoading = false;
 
     private transient boolean signupStatus = false;
 
-    public SignupUser(String firstname, String lastname, String email, String password, String phonenumber){
-          this.firstname = firstname;
-          this.lastname = lastname;
-          this.email = email;
-          this.password = password;
-          this.phonenumber = phonenumber;
+    private transient boolean isNetworkAvailable = false;
+
+    public SignupUser(String firstname, String lastname, String email, String password, int keynode) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.keynode = keynode;
     }
 
-    public SignupUser(String firstname, String lastname, String email, String password, String confirmPassword, String phonenumber){
+    public SignupUser(String firstname, String lastname, String email, String password, String confirmPassword){
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.phonenumber = phonenumber;
     }
 
 
@@ -67,6 +68,10 @@ public class SignupUser {
         return lastname;
     }
 
+    public int getKeynode() {
+        return keynode;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -79,12 +84,18 @@ public class SignupUser {
         return confirmPassword;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
-    }
+
 
     public boolean isPasswordMatch(){
            if(password.equalsIgnoreCase(confirmPassword)) return true;
            return false;
+    }
+
+    public void setNetworkAvailable(boolean networkAvailable) {
+        isNetworkAvailable = networkAvailable;
+    }
+
+    public boolean isNetworkAvailable() {
+        return isNetworkAvailable;
     }
 }

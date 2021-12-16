@@ -62,9 +62,9 @@ class Signup : AppCompatActivity() {
                 binding!!.signupPasswordConfirm.error = "Required"
                 binding!!.signupPasswordConfirm.requestFocus()
             }
-            else if (TextUtils.isEmpty(signupUser.phonenumber)) {
-                binding!!.signupPhone.error = "Required"
-                binding!!.signupPhone.requestFocus()
+            else if(!signupUser.isNetworkAvailable){
+                loadingDialog!!.cancelLoadingDialog()
+                Toast.makeText(this@Signup, "Network not available", Toast.LENGTH_LONG).show()
             }
             else if (signupUser.isLoading) {
                 loadingDialog!!.showLoadingDialog()
@@ -80,6 +80,9 @@ class Signup : AppCompatActivity() {
             else if(!signupUser.signupStatus){
                 loadingDialog!!.cancelLoadingDialog()
                 Toast.makeText(this@Signup, "Email already exist", Toast.LENGTH_LONG).show()
+            }
+            else{
+                Toast.makeText(this@Signup, "Error Occurred please try again", Toast.LENGTH_LONG).show()
             }
 
         })

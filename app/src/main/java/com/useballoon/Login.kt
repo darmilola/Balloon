@@ -45,9 +45,13 @@ class Login : AppCompatActivity() {
                 binding!!.loginEmail.error = "Required"
                 binding!!.loginEmail.requestFocus()
             }
-            if (TextUtils.isEmpty(loginUser.password)) {
+           else  if (TextUtils.isEmpty(loginUser.password)) {
                 binding!!.loginPassword.error = "Required"
                 binding!!.loginPassword.requestFocus()
+            }
+            else if(!loginUser.isNetworkAvailable){
+                loadingDialog!!.cancelLoadingDialog()
+                Toast.makeText(this@Login, "Network not available", Toast.LENGTH_LONG).show()
             }
 
             else if (loginUser.isLoading) {
@@ -61,9 +65,9 @@ class Login : AppCompatActivity() {
                 loadingDialog!!.cancelLoadingDialog()
                 Toast.makeText(this@Login, "Incorrect Email or Password", Toast.LENGTH_LONG).show()
             }
+            else{
+                Toast.makeText(this@Login, "Error Occurred please try again", Toast.LENGTH_LONG).show()
+            }
         })
-
-
-
     }
 }

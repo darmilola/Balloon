@@ -10,7 +10,7 @@ import com.useballoon.Models.ResponseStatus;
 import com.useballoon.Models.SignupUser;
 import com.useballoon.Retrofit.API;
 import com.useballoon.Retrofit.RetrofitClient;
-import com.useballoon.Signup;
+import com.useballoon.Utils.NetworkUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -39,19 +39,52 @@ public class SignupViewModel extends ViewModel {
 
     }
 
+    // function to generate a random string of length n
+    static String generateKeynode()
+    {
+        // chose a Character random from this String
+        String AlphaNumericString = "0123456789";
+
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(5);
+
+        for (int i = 0; i < 5; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int)(AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
+    }
+
 
     public void onClick(View view) {
 
 
-        SignupUser signupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(), confirmPassword.getValue(), phonenumber.getValue());
+        SignupUser signupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(), confirmPassword.getValue());
+
+        if(!NetworkUtils.isNetworkAvailable(view.getContext())){
+            signupUser.setNetworkAvailable(false);
+            userMutableLiveData.setValue(signupUser);
+            return;
+        }
 
 
-        if(!TextUtils.isEmpty(firstname.getValue()) && !TextUtils.isEmpty(lastname.getValue()) && !TextUtils.isEmpty(email.getValue()) && !TextUtils.isEmpty(password.getValue()) && !TextUtils.isEmpty(confirmPassword.getValue()) && !TextUtils.isEmpty(phonenumber.getValue()) && signupUser.isPasswordMatch()){
+        signupUser.setNetworkAvailable(true);
+
+        if(!TextUtils.isEmpty(firstname.getValue()) && !TextUtils.isEmpty(lastname.getValue()) && !TextUtils.isEmpty(email.getValue()) && !TextUtils.isEmpty(password.getValue()) && !TextUtils.isEmpty(confirmPassword.getValue())  && signupUser.isPasswordMatch()){
 
             signupUser.setIsLoading(true);
             userMutableLiveData.setValue(signupUser);
 
-            SignupUser mSignupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(), phonenumber.getValue());
+            SignupUser mSignupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(),Integer.parseInt(generateKeynode()));
             Retrofit retrofit = RetrofitClient.getInstance();
             api = retrofit.create(API.class);
             compositeDisposable.add(api.signUp(mSignupUser)

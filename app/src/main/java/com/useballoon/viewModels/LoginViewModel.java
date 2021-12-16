@@ -14,6 +14,7 @@ import com.useballoon.Models.SignupUser;
 import com.useballoon.Retrofit.API;
 import com.useballoon.Retrofit.RetrofitClient;
 import com.useballoon.Signup;
+import com.useballoon.Utils.NetworkUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -44,6 +45,14 @@ public class LoginViewModel extends ViewModel {
 
         LoginUser loginUser = new LoginUser(email.getValue(), password.getValue());
 
+        if(!NetworkUtils.isNetworkAvailable(view.getContext())){
+            loginUser.setNetworkAvailable(false);
+            userMutableLiveData.setValue(loginUser);
+            return;
+        }
+
+
+        loginUser.setNetworkAvailable(true);
         if(!TextUtils.isEmpty(email.getValue()) && !TextUtils.isEmpty(password.getValue())){
 
             loginUser.setIsLoading(true);

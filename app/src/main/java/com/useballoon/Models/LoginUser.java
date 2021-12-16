@@ -13,6 +13,8 @@ public class LoginUser {
 
     private transient boolean loginStatus = false;
 
+    private transient boolean isNetworkAvailable = false;
+
     public LoginUser(String email, String password){
            this.email = email;
            this.password = password;
@@ -40,5 +42,13 @@ public class LoginUser {
 
     public boolean isLoginStatus() {
         return loginStatus;
+    }
+
+    public void setNetworkAvailable(boolean networkAvailable) {
+        isNetworkAvailable = networkAvailable;
+    }
+
+    public boolean isNetworkAvailable() {
+        return isNetworkAvailable;
     }
 }
