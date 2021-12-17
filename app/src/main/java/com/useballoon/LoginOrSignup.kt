@@ -42,6 +42,7 @@ class LoginOrSignup : AppCompatActivity() {
 
         login.setOnClickListener {
             val intent = Intent(this, Login::class.java)
+            intent.putExtra("fromMain","fromMain")
             startActivity(intent)
         }
         signup.setOnClickListener {

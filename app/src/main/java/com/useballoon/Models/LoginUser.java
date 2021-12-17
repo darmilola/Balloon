@@ -15,6 +15,8 @@ public class LoginUser {
 
     private transient boolean isNetworkAvailable = false;
 
+    private transient boolean isError = false;
+
     public LoginUser(String email, String password){
            this.email = email;
            this.password = password;
@@ -50,5 +52,13 @@ public class LoginUser {
 
     public boolean isNetworkAvailable() {
         return isNetworkAvailable;
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public void setError(boolean error) {
+        isError = error;
     }
 }

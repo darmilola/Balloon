@@ -71,7 +71,7 @@ class Signup : AppCompatActivity() {
             }
             else if(signupUser.signupStatus){
                 loadingDialog!!.cancelLoadingDialog()
-                startActivity(Intent(this@Signup,MainActivity2::class.java))
+                Toast.makeText(this@Signup, "Signup Success", Toast.LENGTH_LONG).show()
             }
             else if (!signupUser.isPasswordMatch){
                 loadingDialog!!.cancelLoadingDialog()

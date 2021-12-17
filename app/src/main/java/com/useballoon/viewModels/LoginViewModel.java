@@ -1,5 +1,6 @@
 package com.useballoon.viewModels;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,7 @@ public class LoginViewModel extends ViewModel {
     private API api;
     private Retrofit retrofit;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private LoginUser loginUser;
 
     public MutableLiveData<LoginUser> getUser() {
 
@@ -39,11 +41,14 @@ public class LoginViewModel extends ViewModel {
 
     }
 
+    public void createNewAccount(View view){
+        view.getContext().startActivity(new Intent(view.getContext(),Signup.class));
+    }
 
 
     public void onClick(View view) {
 
-        LoginUser loginUser = new LoginUser(email.getValue(), password.getValue());
+        loginUser = new LoginUser(email.getValue(), password.getValue());
 
         if(!NetworkUtils.isNetworkAvailable(view.getContext())){
             loginUser.setNetworkAvailable(false);
@@ -63,22 +68,7 @@ public class LoginViewModel extends ViewModel {
             compositeDisposable.add(api.login(loginUser)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<ResponseStatus>() {
-                        @Override
-                        public void accept(ResponseStatus responseStatus) throws Exception {
-                            if(responseStatus.getStatus().equalsIgnoreCase("success")){
-                                loginUser.setIsLoading(false);
-                                loginUser.setLoginStatus(true);
-                                userMutableLiveData.setValue(loginUser);
-                            }
-                            else if(responseStatus.getStatus().equalsIgnoreCase("failure")){
-                                 loginUser.setIsLoading(false);
-                                 loginUser.setLoginStatus(false);
-                                 userMutableLiveData.setValue(loginUser);
-                            }
-                        }
-
-                    }));
+                    .subscribe(this::HandleResults, this::handleError));
         }
         else {
             loginUser.setIsLoading(false);
@@ -86,6 +76,25 @@ public class LoginViewModel extends ViewModel {
 
         }
     }
+
+    void HandleResults(ResponseStatus responseStatus){
+
+        if(responseStatus.getStatus().equalsIgnoreCase("success")){
+            loginUser.setIsLoading(false);
+            loginUser.setLoginStatus(true);
+            userMutableLiveData.setValue(loginUser);
+        }
+        else if(responseStatus.getStatus().equalsIgnoreCase("failure")){
+            loginUser.setIsLoading(false);
+            loginUser.setLoginStatus(false);
+            userMutableLiveData.setValue(loginUser);
+        }
+    }
+
+    private void handleError(Throwable t) {
+           loginUser.setError(true);
+    }
+
 
 
 }

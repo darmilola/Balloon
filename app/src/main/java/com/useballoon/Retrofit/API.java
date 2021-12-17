@@ -1,5 +1,6 @@
 package com.useballoon.Retrofit;
 
+import com.useballoon.Models.ActivateUser;
 import com.useballoon.Models.LoginUser;
 import com.useballoon.Models.ResponseStatus;
 import com.useballoon.Models.SignupUser;
@@ -15,4 +16,7 @@ public interface API {
 
     @POST("users/auth")
     Observable<ResponseStatus> login(@Body LoginUser loginUser);
+
+    @POST("users/activate")
+    Observable<ResponseStatus> activate(@Body ActivateUser activateUser);
 }

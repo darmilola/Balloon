@@ -27,6 +27,9 @@ public class SignupUser {
 
     private transient boolean isNetworkAvailable = false;
 
+    private transient boolean isError = false;
+
+
     public SignupUser(String firstname, String lastname, String email, String password, int keynode) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -85,6 +88,9 @@ public class SignupUser {
     }
 
 
+    public boolean isError() {
+        return isError;
+    }
 
     public boolean isPasswordMatch(){
            if(password.equalsIgnoreCase(confirmPassword)) return true;
@@ -97,5 +103,9 @@ public class SignupUser {
 
     public boolean isNetworkAvailable() {
         return isNetworkAvailable;
+    }
+
+    public void setError(boolean error) {
+        isError = error;
     }
 }

@@ -29,6 +29,7 @@ public class SignupViewModel extends ViewModel {
     private API api;
     private Retrofit retrofit;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private SignupUser signupUser;
 
     public MutableLiveData<SignupUser> getUser() {
 
@@ -68,7 +69,7 @@ public class SignupViewModel extends ViewModel {
     public void onClick(View view) {
 
 
-        SignupUser signupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(), confirmPassword.getValue());
+        signupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(), confirmPassword.getValue());
 
         if(!NetworkUtils.isNetworkAvailable(view.getContext())){
             signupUser.setNetworkAvailable(false);
@@ -90,28 +91,31 @@ public class SignupViewModel extends ViewModel {
             compositeDisposable.add(api.signUp(mSignupUser)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<ResponseStatus>() {
-                        @Override
-                        public void accept(ResponseStatus responseStatus) throws Exception {
-                               if(responseStatus.getStatus().equalsIgnoreCase("success")){
-                                    signupUser.setIsLoading(false);
-                                    signupUser.setSignupStatus(true);
-                                    userMutableLiveData.setValue(signupUser);
-                               }
-                            else if(responseStatus.getStatus().equalsIgnoreCase("failure")){
-                                    signupUser.setIsLoading(false);
-                                    signupUser.setSignupStatus(false);
-                                    userMutableLiveData.setValue(signupUser);
-                            }
-                        }
-
-                    }));
+                    .subscribe(this::HandleResults, this::handleError));
         }
         else {
             signupUser.setIsLoading(false);
             userMutableLiveData.setValue(signupUser);
 
         }
+    }
+
+    void HandleResults(ResponseStatus responseStatus){
+
+        if(responseStatus.getStatus().equalsIgnoreCase("success")){
+            signupUser.setIsLoading(false);
+            signupUser.setSignupStatus(true);
+            userMutableLiveData.setValue(signupUser);
+        }
+        else if(responseStatus.getStatus().equalsIgnoreCase("failure")){
+            signupUser.setIsLoading(false);
+            signupUser.setSignupStatus(false);
+            userMutableLiveData.setValue(signupUser);
+        }
+    }
+
+    private void handleError(Throwable t) {
+        signupUser.setError(true);
     }
 
 }
