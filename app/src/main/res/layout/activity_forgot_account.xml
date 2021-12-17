@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="LoginViewModel"
+            type="com.useballoon.viewModels.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_gradient"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="5"
+            android:gravity="center">
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:layout_marginTop="30dp">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="24dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/grobold"
+                            android:gravity="center"
+                            android:text="Reset your Password"/>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Email"
+                                android:textColor="@color/black"
+                                android:textSize="14dp"
+                                android:fontFamily="@font/gromed"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="*"
+                                android:layout_marginLeft="4dp"
+                                android:textColor="#f70e33"
+                                android:textSize="17dp"
+                                android:fontFamily="@font/gromed"/>
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:paddingLeft="10dp"
+                            android:fontFamily="@font/gromed"
+                            android:textSize="17dp"
+                            android:id="@+id/login_email"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/lighter_text_color"
+                            android:hint="example@gmail.com"
+                            android:background="@drawable/auth_edittext_background"/>
+
+
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Reset Password"
+                            android:fontFamily="@font/grobold"
+                            android:letterSpacing="0.005"
+                            android:backgroundTint="@color/balloon_primary"
+                            android:id="@+id/login_with_email_button"
+                            android:textAllCaps="false"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
+
+

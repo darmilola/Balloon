@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.useballoon.ForgotAccount;
 import com.useballoon.Models.LoginUser;
 import com.useballoon.Models.ResponseStatus;
 import com.useballoon.Models.SignupUser;
@@ -43,6 +44,10 @@ public class LoginViewModel extends ViewModel {
 
     public void createNewAccount(View view){
         view.getContext().startActivity(new Intent(view.getContext(),Signup.class));
+    }
+
+    public void forgotPasssword(View view){
+        view.getContext().startActivity(new Intent(view.getContext(), ForgotAccount.class));
     }
 
 

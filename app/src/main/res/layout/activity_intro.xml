@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ececed"
+    android:gravity="center"
+    tools:context=".Intro">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardElevation="1dp"
+                app:cardCornerRadius="5dp"
+                android:padding="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp">
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/welcome_waves"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/grobold"
+                        android:gravity="center"
+                        android:text="Welcome to Balloon, Damilola"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:text="On Balloon, you can hire as much people (Evangelists) as you want to do or say ANYTHING to popularize your music."
+                        android:gravity="center"
+                        android:fontFamily="@font/groreg"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/light_text_color"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:layout_marginTop="25dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/groreg"
+                        android:gravity="left"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="But before you continue Times, here are a few key things to understand:"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/welcome_1"
+                        android:gravity="center|left"
+                        android:layout_marginTop="15dp"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/groreg"
+                        android:justificationMode="inter_word"
+                        android:textColor="@color/light_text_color"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/lighter_text_color"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/welcome_2"
+                        android:gravity="center|left"
+                        android:layout_marginTop="15dp"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/groreg"
+                        android:justificationMode="inter_word"
+                        android:textColor="@color/light_text_color"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/lighter_text_color"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:text="@string/welcome_3"
+                        android:gravity="center"
+                        android:textSize="15dp"
+                        android:layout_marginBottom="40dp"
+                        android:fontFamily="@font/groreg"
+                        android:textColor="@color/light_text_color"/>
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/intro_create_a_mission"
+        android:background="@drawable/auth_edittext_background"
+        android:orientation="horizontal"
+        android:backgroundTint="@color/balloon_primary"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create a mission"
+            android:fontFamily="@font/grobold"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="10dp"
+            app:tint="@color/White"
+            android:src="@drawable/_829869_arrow_next_right_icon"/>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -106,7 +106,8 @@ class Login : AppCompatActivity() {
                     loadingDialog!!.showLoadingDialog()
                 } else if (loginUser.isLoginStatus) {
                     loadingDialog!!.cancelLoadingDialog()
-                    Toast.makeText(this@Login, "Login Success", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@Login, Intro::class.java)
+                    startActivity(intent)
                 } else if (!loginUser.isLoginStatus) {
                     loadingDialog!!.cancelLoadingDialog()
                     Toast.makeText(this@Login, "Incorrect Email or Password", Toast.LENGTH_LONG)
@@ -114,11 +115,11 @@ class Login : AppCompatActivity() {
                 }
              else if (!loginUser.isError) {
                 loadingDialog!!.cancelLoadingDialog()
-                Toast.makeText(this@Login, "Error Occured please try again", Toast.LENGTH_LONG).show()
-            } else {
+                Toast.makeText(this@Login, "Error occurred please try again", Toast.LENGTH_LONG).show()
+             } else {
                     Toast.makeText(this@Login, "Error Occurred please try again", Toast.LENGTH_LONG)
                         .show()
-                }
+             }
             })
 
 

@@ -1,5 +1,7 @@
 package com.useballoon
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -71,6 +73,7 @@ class Signup : AppCompatActivity() {
             }
             else if(signupUser.signupStatus){
                 loadingDialog!!.cancelLoadingDialog()
+                showAlert()
                 Toast.makeText(this@Signup, "Signup Success", Toast.LENGTH_LONG).show()
             }
             else if (!signupUser.isPasswordMatch){
@@ -81,13 +84,24 @@ class Signup : AppCompatActivity() {
                 loadingDialog!!.cancelLoadingDialog()
                 Toast.makeText(this@Signup, "Email already exist", Toast.LENGTH_LONG).show()
             }
+            else if(signupUser.isError){
+                Toast.makeText(this@Signup, "There seems to be an error creating your account", Toast.LENGTH_LONG).show()
+            }
             else{
                 Toast.makeText(this@Signup, "Error Occurred please try again", Toast.LENGTH_LONG).show()
             }
 
         })
 
+    }
 
-
+    private fun showAlert() {
+        AlertDialog.Builder(this@Signup)
+            .setTitle("Activate Account")
+            .setMessage("Your Balloon account was successfully created. An activation link has now been sent to your email. Check your email to activate your account. The link expires in 10 minutes.") // Specifying a listener allows you to take an action before dismissing the dialog.
+            .setPositiveButton("Okay", DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+            })
+            .show()
     }
 }
