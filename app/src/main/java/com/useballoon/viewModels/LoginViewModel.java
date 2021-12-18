@@ -29,7 +29,6 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> password = new MutableLiveData<>();
     private MutableLiveData<LoginUser> userMutableLiveData;
     private API api;
-    private Retrofit retrofit;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     private LoginUser loginUser;
 
@@ -78,7 +77,6 @@ public class LoginViewModel extends ViewModel {
         else {
             loginUser.setIsLoading(false);
             userMutableLiveData.setValue(loginUser);
-
         }
     }
 
@@ -98,8 +96,7 @@ public class LoginViewModel extends ViewModel {
 
     private void handleError(Throwable t) {
            loginUser.setError(true);
+           userMutableLiveData.setValue(loginUser);
     }
-
-
 
 }

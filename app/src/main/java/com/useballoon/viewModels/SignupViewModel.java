@@ -116,6 +116,7 @@ public class SignupViewModel extends ViewModel {
 
     private void handleError(Throwable t) {
         signupUser.setError(true);
+        userMutableLiveData.setValue(signupUser);
     }
 
 }

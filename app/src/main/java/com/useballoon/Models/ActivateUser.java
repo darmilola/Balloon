@@ -17,7 +17,7 @@ public class ActivateUser {
 
     private transient boolean activationStatus = false;
 
-    private transient boolean isNetworkAvailable = false;
+    private transient boolean isNetworkAvailable = true;
 
     public ActivateUser(int userId, int validate, String validatedate){
            this.userId = userId;

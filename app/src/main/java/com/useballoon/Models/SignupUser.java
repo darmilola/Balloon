@@ -25,7 +25,7 @@ public class SignupUser {
 
     private transient boolean signupStatus = false;
 
-    private transient boolean isNetworkAvailable = false;
+    private transient boolean isNetworkAvailable = true;
 
     private transient boolean isError = false;
 

@@ -41,6 +41,7 @@ class Signup : AppCompatActivity() {
         binding!!.signupViewModel = signupViewModel
 
 
+
         signupViewModel!!.user.observe(this, Observer<SignupUser> { signupUser ->
             if (TextUtils.isEmpty(signupUser.firstname)) {
                 binding!!.signupFirstname.error = "Required"

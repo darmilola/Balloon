@@ -1,6 +1,7 @@
 package com.useballoon
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -29,10 +30,12 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import java.sql.Timestamp
 import android.content.DialogInterface
+import android.preference.PreferenceManager
 import android.provider.Contacts
 import com.google.android.material.button.MaterialButton
 
 
+@Suppress("DEPRECATION")
 class Login : AppCompatActivity() {
 
     private var loginViewModel: LoginViewModel? = null
@@ -106,6 +109,11 @@ class Login : AppCompatActivity() {
                     loadingDialog!!.showLoadingDialog()
                 } else if (loginUser.isLoginStatus) {
                     loadingDialog!!.cancelLoadingDialog()
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val edit = preferences.edit()
+                    edit.putString(getString(R.string.saved_user_email), loginUser.email)
+                    edit.apply()
+
                     val intent = Intent(this@Login, Intro::class.java)
                     startActivity(intent)
                 } else if (!loginUser.isLoginStatus) {

@@ -13,7 +13,7 @@ public class LoginUser {
 
     private transient boolean loginStatus = false;
 
-    private transient boolean isNetworkAvailable = false;
+    private transient boolean isNetworkAvailable = true;
 
     private transient boolean isError = false;
 
