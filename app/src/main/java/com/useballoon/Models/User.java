@@ -12,7 +12,7 @@ public class User {
     @SerializedName("email")
     private String email;
 
-    @SerializedName("doneReg")
+    @SerializedName("donereg")
     private int donereg;
 
     public User(String firstname, String userId, String email, int donereg){
