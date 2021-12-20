@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".CreateAMissionStep1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/groreg"
+                android:text="Attachment (optional)"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:textColor="@color/light_text_color"
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/groreg"
+                android:text="Here you can upload any additional picture or video or music you think your Evangelists will need to fully execute your mission. Just ensure you provide full context in the Instructions box below."/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/groreg"
+                android:text="Instructions"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/groreg"
+                android:text="Tell your Evangelists how you want them to promote your music. Tell them in a step-by-step format. Look at an example »"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Step 1"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/gromed"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#f70e33"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/gromed"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbars="vertical"
+                android:lines="3"
+                android:hint="Example 1. download and listen to my music."
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/groreg"
+                android:background="@drawable/auth_edittext_background"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Step 2"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/gromed"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#f70e33"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/gromed"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbars="vertical"
+                android:lines="3"
+                android:hint="Example 2: Make a video of you dancing old school Azonto dance and use my music as the background music"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/groreg"
+                android:background="@drawable/auth_edittext_background"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Step 3"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/gromed"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#f70e33"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/gromed"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbars="vertical"
+                android:lines="3"
+                android:hint="Example 3: Post the video on your tiktok and Instagram"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/groreg"
+                android:background="@drawable/auth_edittext_background"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Step 4"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/gromed"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbars="vertical"
+                android:lines="3"
+                android:hint="Example 4: Use the hashtag #powermen"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/groreg"
+                android:background="@drawable/auth_edittext_background"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Step 5"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/gromed"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbars="vertical"
+                android:lines="3"
+                android:hint="Example 5: Share to your facebook as well."
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/groreg"
+                android:background="@drawable/auth_edittext_background"/>
+
+
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/intro_create_a_mission"
+                android:layout_gravity="right"
+                android:background="@drawable/auth_edittext_background"
+                android:orientation="horizontal"
+                android:backgroundTint="@color/balloon_primary"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save and Go to Final Step"
+                    android:fontFamily="@font/grobold"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="10dp"
+                    app:tint="@color/White"
+                    android:src="@drawable/_829869_arrow_next_right_icon"/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

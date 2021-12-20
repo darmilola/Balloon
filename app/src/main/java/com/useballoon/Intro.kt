@@ -1,52 +1,37 @@
 package com.useballoon
-import android.content.Context
+
+
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
-import android.text.TextUtils
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.View
+import android.view.ViewTreeObserver.OnScrollChangedListener
 import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.*
-import com.google.android.material.button.MaterialButton
 import com.useballoon.Models.IntroResponse
-import com.useballoon.Models.SignupUser
 import com.useballoon.Models.User
-import com.useballoon.Utils.LottieLoadingDialog
 import com.useballoon.databinding.ActivityIntroBinding
-import com.useballoon.databinding.ActivitySignupBinding
 import com.useballoon.viewModels.IntroViewModel
-import com.useballoon.viewModels.SignupViewModel
-import android.preference.PreferenceManager
-
-import android.content.SharedPreferences
-import android.graphics.Color
-import android.text.Spanned
-
-import android.text.style.URLSpan
-
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.graphics.Typeface
-
-import android.text.style.StyleSpan
+import kotlinx.coroutines.*
 import okhttp3.MediaType
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import org.json.JSONException
-
 import org.json.JSONObject
-
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @Suppress("DEPRECATION")
@@ -120,6 +105,12 @@ class Intro : AppCompatActivity() {
 
         val imageView = findViewById<ImageView>(R.id.welcome_waves)
         Glide.with(this).load(R.drawable.wavegif).into(imageView)
+
+        binding!!.introScrollview.viewTreeObserver.addOnScrollChangedListener(OnScrollChangedListener {
+            if (binding!!.introScrollview.canScrollVertically(1)){
+                binding!!.introCreateAMission.visibility = View.VISIBLE
+            }
+        })
 
     }
 
