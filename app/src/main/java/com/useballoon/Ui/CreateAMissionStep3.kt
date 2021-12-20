@@ -1,10 +1,19 @@
-package com.useballoon
+package com.useballoon.Ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import com.useballoon.R
+import android.view.MotionEvent
+
+
+import android.view.View.OnTouchListener
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +29,8 @@ class CreateAMissionStep3 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var mView: View? = null;
+    private var proof: EditText? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +45,18 @@ class CreateAMissionStep3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_a_mission_step3, container, false)
+        mView =  inflater.inflate(R.layout.fragment_create_a_mission_step3, container, false)
+         proof = mView!!.findViewById(R.id.step3_proof_of_execution)
+
+        proof!!.setOnTouchListener(OnTouchListener { view, event -> // TODO Auto-generated method stub
+                view.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_UP -> view.parent.requestDisallowInterceptTouchEvent(false)
+                }
+            false
+        })
+
+        return mView
     }
 
     companion object {

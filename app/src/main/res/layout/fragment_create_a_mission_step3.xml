@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    tools:context=".CreateAMissionStep1">
+    android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,30 +39,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/light_text_color"
-                android:textSize="10dp"
+                android:textSize="14dp"
                 android:ellipsize="end"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/groreg"
                 android:text="Recommendation: Since this is your first mission, we recommend that you hire just 1 Evangelist first so you can fully understand how everything works and then later on, you can hire as much as possible."/>
 
 
-            <com.travijuu.numberpicker.library.NumberPicker
-                android:id="@+id/number_picker"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                numberpicker:min="0"
-                numberpicker:max="10"
-                numberpicker:value="-5"
-                numberpicker:unit="1"
-                numberpicker:focusable="false"
-                numberpicker:custom_layout="@layout/number_picker_custom_layout" />
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:weightSum="3"
+                android:background="@drawable/auth_edittext_background">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/lighter_text_color"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/_931142_minimize_minus_remove_line_icon"
+                    android:padding="20dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:text="1"
+                    android:fontFamily="@font/groreg"
+                    android:background="@drawable/inc_background"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/_931155_add_attach_create_maximize_new_icon"
+                    android:padding="20dp"/>
+            </LinearLayout>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_text_color"
+            android:textSize="15dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/groreg"
+            android:text="You are hiring 1 Evanagelist(s)"/>
+
 
 
             <TextView
@@ -75,23 +100,71 @@
                 android:layout_marginTop="20dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/groreg"
-                android:text="Your Music or Video URL"/>
+                android:text="Compensation"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/light_text_color"
                 android:textSize="15dp"
-                android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/groreg"
-                android:text="The URL to the Music or Video you want to promote."/>
+                android:text="How much you are willing to pay each Evangelist to promote your music? Minimum is ₦2,000. See Important Info »"/>
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:maxLines="1"
+                android:textSize="15dp"
+                android:fontFamily="@font/groreg"
+                android:textColor="@color/black"
+                android:inputType="number"
+                android:hint="Compensation Amount"
+                android:background="@drawable/auth_edittext_background"/>
+
+
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:maxLines="1"
+                android:layout_marginTop="30dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/groreg"
+                android:text="Proof of Execution"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/groreg"
+                android:text="How should your Evangelists prove that they have executed your mission? E.g: You can say that they should show you a particular screenshot, say a certain phrase or send a particular video or document or tag you on social media. Anything.\n Look at an example »"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbars="vertical"
+                android:lines="4"
+                android:id="@+id/step3_proof_of_execution"
+                android:hint="Write something..."
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

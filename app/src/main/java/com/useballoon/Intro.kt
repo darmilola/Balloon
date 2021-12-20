@@ -82,7 +82,7 @@ class Intro : AppCompatActivity() {
                       userEmail = users[0].email
                   }
                 else{
-                      val intent = Intent(this@Intro, MainActivity::class.java)
+                      val intent = Intent(this@Intro, CreateAMission::class.java)
                       startActivity(intent)
                       finish()
                 }
@@ -99,7 +99,7 @@ class Intro : AppCompatActivity() {
                 performCoroutineTaskUpdateDoneReg(userEmail)
             }
 
-            val intent = Intent(this@Intro, MainActivity::class.java)
+            val intent = Intent(this@Intro, CreateAMission::class.java)
             startActivity(intent)
         }
 
