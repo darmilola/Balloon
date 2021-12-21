@@ -2,59 +2,102 @@ package com.useballoon.Ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.useballoon.Adapter.AttachmentAdapter
+import com.useballoon.Models.Attachments
 import com.useballoon.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateAMissionStep2.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CreateAMissionStep2 : Fragment() {
+
+class CreateAMissionStep2 : Fragment(){
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var mView: View
+    private lateinit var attachmentAdapter: AttachmentAdapter
+    private lateinit var layoutManger: GridLayoutManager
+    private var attachmentList: ArrayList<Attachments> = ArrayList()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var mDialog: Dialog
+    private lateinit var instructions: TextView
+    private lateinit var iUndestand: MaterialButton
+    private lateinit var upload: MaterialButton
+    private var cancelDialog: ImageView? = null
+    private lateinit var step2SuccessListener: Step2SuccessListener
+    private lateinit var next: LinearLayout
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    interface Step2SuccessListener {
+        fun onStep2Success()
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        step2SuccessListener = context as Step2SuccessListener
+    }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_a_mission_step2, container, false)
+        mView =  inflater.inflate(R.layout.fragment_create_a_mission_step2, container, false)
+        initView()
+        return mView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreateAMissionStep2.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateAMissionStep2().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun initView(){
+        val  attachment1 = Attachments(1,"")
+        val  attachment2 = Attachments(2,"")
+        val  attachment5 = Attachments(5,"")
+        attachmentList.add(attachment1)
+        attachmentList.add(attachment2)
+        attachmentList.add(attachment5)
+
+        next = mView.findViewById(R.id.create_a_mission_step2_next)
+        recyclerView = mView.findViewById(R.id.step2_attachments_recyclerview)
+        instructions = mView.findViewById(R.id.create_mission_setp2_instructions);
+        layoutManger = GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
+        attachmentAdapter = AttachmentAdapter(requireContext(),attachmentList)
+        recyclerView.adapter = attachmentAdapter
+        recyclerView.layoutManager = layoutManger
+
+        instructions.setOnClickListener {
+            launchInstructionsDialog()
+        }
+
+        next.setOnClickListener {
+            step2SuccessListener.onStep2Success()
+        }
     }
+
+    private fun launchInstructionsDialog() {
+        mDialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+        mDialog.setContentView(R.layout.step2_example_dialog)
+        iUndestand = mDialog.findViewById(R.id.create_mission_setp2_understand);
+        mDialog.setCanceledOnTouchOutside(true)
+        cancelDialog = mDialog!!.findViewById(R.id.cancel_dialog_icon);
+        mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDialog.show()
+        iUndestand.setOnClickListener {
+            mDialog.dismiss()
+        }
+        cancelDialog!!.setOnClickListener {
+            mDialog.dismiss()
+        }
+
+    }
+
+
+
 }

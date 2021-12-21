@@ -1,73 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
-    <ScrollView
+    android:orientation="vertical"
+    android:background="@color/transparent">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:id="@+id/cancel_dialog_icon"
+        android:src="@drawable/_26554_cancel_icon"
+        android:elevation="5dp"
+        app:tint="@color/red"/>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="500dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/groreg"
-                android:text="Attachment (optional)"/>
-
-
-            <TextView
+            android:weightSum="5.3">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:textColor="@color/light_text_color"
-                android:textSize="15dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/groreg"
-                android:text="Here you can upload any additional picture or video or music you think your Evangelists will need to fully execute your mission. Just ensure you provide full context in the Instructions box below."/>
+                android:layout_weight="0.6"
+                android:background="@color/balloon_primary"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Example"
+                    android:fontFamily="@font/groreg"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.8">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:itemCount="1"
-                app:spanCount="2"
-                android:id="@+id/step2_attachments_recyclerview"
-                tools:listitem="@layout/upload_item_type_select"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="17dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/groreg"
-                android:text="Instructions"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/light_text_color"
-                android:textSize="15dp"
-                android:id="@+id/create_mission_setp2_instructions"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/groreg"
-                android:text="Tell your Evangelists how you want them to promote your music. Tell them in a step-by-step format. Look at an example »"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructions"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/gromed"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,24 +95,29 @@
                     android:textSize="17dp"
                     android:fontFamily="@font/gromed"/>
             </LinearLayout>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
-                android:hint="Example 1. download and listen to my music."
+                android:gravity="center|left"
+                android:text="1. Download and listen to my music."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,24 +136,29 @@
                     android:textSize="17dp"
                     android:fontFamily="@font/gromed"/>
             </LinearLayout>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
-                android:hint="Example 2: Make a video of you dancing old school Azonto dance and use my music as the background music"
+                android:gravity="center|left"
+                android:text="2. Make a video of you dancing the old school Azonto and use my music as the background music."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -158,15 +177,18 @@
                     android:textSize="17dp"
                     android:fontFamily="@font/gromed"/>
             </LinearLayout>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
-                android:hint="Example 3: Post the video on your tiktok and Instagram"
+                android:gravity="center|left"
+                android:text="3. Post the video on your TikTok and Instagram."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:fontFamily="@font/groreg"
@@ -177,6 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,16 +208,20 @@
                     android:textColor="@color/black"
                     android:textSize="14dp"
                     android:fontFamily="@font/gromed"/>
+
             </LinearLayout>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
-                android:hint="Example 4: Use the hashtag #powermen"
+                android:gravity="center|left"
+                android:text="Use the hashtag #powermen."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:fontFamily="@font/groreg"
@@ -205,66 +232,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Step 5"
+                    android:text="Step 4"
                     android:textColor="@color/black"
                     android:textSize="14dp"
                     android:fontFamily="@font/gromed"/>
+
             </LinearLayout>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
-                android:hint="Example 5: Share to your facebook as well."
+                android:gravity="center|left"
+                android:text="Share to your Facebook as well."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
-
+                </LinearLayout>
+            </ScrollView>
 
             <LinearLayout
-                android:layout_width="230dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
-                android:id="@+id/create_a_mission_step2_next"
-                android:layout_gravity="center"
-                android:background="@drawable/auth_edittext_background"
-                android:orientation="horizontal"
-                android:backgroundTint="@color/balloon_primary"
-                android:gravity="center">
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:gravity="top|center"
+                android:layout_gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Save and Go to Final Step"
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Okay, i understand"
                     android:fontFamily="@font/grobold"
-                    android:textSize="14dp"
-                    android:textColor="@color/white"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    app:tint="@color/White"
-                    android:src="@drawable/_829869_arrow_next_right_icon"/>
-
+                    android:letterSpacing="0.005"
+                    android:backgroundTint="#00a400"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/create_mission_setp2_understand"
+                    android:textAllCaps="false"
+                    android:textSize="15dp"/>
 
 
             </LinearLayout>
 
+
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-    </ScrollView>
 
-</LinearLayout>
+</FrameLayout>

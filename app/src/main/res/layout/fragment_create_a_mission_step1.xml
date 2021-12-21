@@ -87,7 +87,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
-                android:id="@+id/intro_create_a_mission"
+                android:id="@+id/create_a_mission_step1_next"
                 android:layout_gravity="right"
                 android:background="@drawable/auth_edittext_background"
                 android:orientation="horizontal"

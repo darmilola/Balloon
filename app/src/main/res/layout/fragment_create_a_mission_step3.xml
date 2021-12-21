@@ -107,6 +107,7 @@
                 android:textColor="@color/light_text_color"
                 android:textSize="15dp"
                 android:ellipsize="end"
+                android:id="@+id/create_mission_step3_important_info"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/groreg"
                 android:text="How much you are willing to pay each Evangelist to promote your music? Minimum is ₦2,000. See Important Info »"/>
@@ -148,6 +149,7 @@
                 android:textSize="15dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/groreg"
+                android:id="@+id/create_mission_step3_execution_sample"
                 android:text="How should your Evangelists prove that they have executed your mission? E.g: You can say that they should show you a particular screenshot, say a certain phrase or send a particular video or document or tag you on social media. Anything.\n Look at an example »"/>
 
             <EditText

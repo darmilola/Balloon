@@ -1,5 +1,8 @@
 package com.useballoon.Ui
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,34 +14,22 @@ import android.view.MotionEvent
 
 
 import android.view.View.OnTouchListener
+import android.widget.ImageView
+import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 
 
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateAMissionStep3.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CreateAMissionStep3 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private var mView: View? = null;
     private var proof: EditText? = null;
+    private var importantInfo: TextView? = null;
+    private var executionSample: TextView? = null;
+    private var executionDialog: Dialog? = null
+    private var infoDialog: Dialog? = null
+    private var executionUndestand: MaterialButton? = null
+    private var cancelDialog: ImageView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,36 +37,62 @@ class CreateAMissionStep3 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         mView =  inflater.inflate(R.layout.fragment_create_a_mission_step3, container, false)
-         proof = mView!!.findViewById(R.id.step3_proof_of_execution)
-
-        proof!!.setOnTouchListener(OnTouchListener { view, event -> // TODO Auto-generated method stub
-                view.parent.requestDisallowInterceptTouchEvent(true)
-                when (event.action and MotionEvent.ACTION_MASK) {
-                    MotionEvent.ACTION_UP -> view.parent.requestDisallowInterceptTouchEvent(false)
-                }
-            false
-        })
+        initView()
 
         return mView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreateAMissionStep3.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateAMissionStep3().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    fun initView(){
+        proof = mView!!.findViewById(R.id.step3_proof_of_execution)
+        importantInfo = mView!!.findViewById(R.id.create_mission_step3_important_info)
+        executionSample = mView!!.findViewById(R.id.create_mission_step3_execution_sample)
+
+        proof!!.setOnTouchListener(OnTouchListener { view, event -> // TODO Auto-generated method stub
+            view.parent.requestDisallowInterceptTouchEvent(true)
+            when (event.action and MotionEvent.ACTION_MASK) {
+                MotionEvent.ACTION_UP -> view.parent.requestDisallowInterceptTouchEvent(false)
             }
+            false
+        })
+
+        executionSample!!.setOnClickListener {
+            launchInstructionsDialog()
+        }
+
+        importantInfo!!.setOnClickListener {
+            LaunchImportantInfo()
+        }
+
     }
+
+    private fun launchInstructionsDialog() {
+        executionDialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+        executionDialog!!.setContentView(R.layout.create_mission_step3_proof_of_mission)
+        cancelDialog = executionDialog!!.findViewById(R.id.cancel_dialog_icon);
+        executionUndestand = executionDialog!!.findViewById(R.id.create_mission_setp3_execution_understand);
+        executionDialog!!.setCanceledOnTouchOutside(true)
+        executionDialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        executionDialog!!.show()
+        executionUndestand!!.setOnClickListener {
+            executionDialog!!.dismiss()
+        }
+        cancelDialog!!.setOnClickListener {
+            executionDialog!!.dismiss()
+        }
+
+    }
+
+    private fun LaunchImportantInfo() {
+        infoDialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+        infoDialog!!.setContentView(R.layout.create_mission_step3_important_info)
+        cancelDialog = infoDialog!!.findViewById(R.id.cancel_dialog_icon);
+        infoDialog!!.setCanceledOnTouchOutside(true)
+        infoDialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        infoDialog!!.show()
+
+        cancelDialog!!.setOnClickListener {
+            infoDialog!!.dismiss()
+        }
+    }
+
 }

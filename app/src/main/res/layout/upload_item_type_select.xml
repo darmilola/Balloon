@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="110dp"
+    android:layout_height="230dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/upload_item_select_background">
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:tint="@color/balloon_primary"
+            android:src="@drawable/_669479_add_ic_icon"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="Add File"
+            android:textSize="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/groreg"
+            android:textColor="@color/balloon_primary"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
