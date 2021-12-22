@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="step2ViewModel"
+            type="com.useballoon.viewModels.Step2ViewModel" />
+    </data>
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
@@ -94,6 +103,8 @@
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
+                android:id="@+id/create_a_mission_step2_step1"
+                android:text="@={step2ViewModel.step1}"
                 android:hint="Example 1. download and listen to my music."
                 android:textColor="@color/black"
                 android:textSize="14dp"
@@ -130,9 +141,11 @@
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
+                android:text="@={step2ViewModel.step2}"
                 android:hint="Example 2: Make a video of you dancing old school Azonto dance and use my music as the background music"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:id="@+id/create_a_mission_step2_step2"
                 android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
 
@@ -166,9 +179,11 @@
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
+                android:text="@={step2ViewModel.step3}"
                 android:hint="Example 3: Post the video on your tiktok and Instagram"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:id="@+id/create_a_mission_step2_step3"
                 android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
 
@@ -194,9 +209,11 @@
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
+                android:text="@={step2ViewModel.step4}"
                 android:hint="Example 4: Use the hashtag #powermen"
                 android:textColor="@color/black"
                 android:textSize="14dp"
+                android:id="@+id/create_a_mission_step2_step4"
                 android:fontFamily="@font/groreg"
                 android:background="@drawable/auth_edittext_background"/>
 
@@ -222,6 +239,8 @@
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="3"
+                android:id="@+id/create_a_mission_step2_step5"
+                android:text="@={step2ViewModel.step5}"
                 android:hint="Example 5: Share to your facebook as well."
                 android:textColor="@color/black"
                 android:textSize="14dp"
@@ -235,6 +254,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:onClick="@{(v) -> step2ViewModel.onClick(v)}"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
                 android:id="@+id/create_a_mission_step2_next"
@@ -268,3 +288,5 @@
     </ScrollView>
 
 </LinearLayout>
+</layout>
+

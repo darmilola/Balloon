@@ -12,13 +12,27 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.TextUtils
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
+import com.useballoon.Models.Mission
+import com.useballoon.Retrofit.API
+import com.useballoon.Utils.LottieLoadingDialog
+import com.useballoon.databinding.FragmentCreateAMissionStep1Binding
+import com.useballoon.databinding.FragmentCreateAMissionStep2Binding
+import com.useballoon.viewModels.Step1ViewModel
+import com.useballoon.viewModels.Step2ViewModel
+import io.reactivex.disposables.CompositeDisposable
 
 
+@Suppress("DEPRECATION")
 class CreateAMissionStep2 : Fragment(){
     // TODO: Rename and change types of parameters
     private lateinit var mView: View
@@ -33,6 +47,11 @@ class CreateAMissionStep2 : Fragment(){
     private var cancelDialog: ImageView? = null
     private lateinit var step2SuccessListener: Step2SuccessListener
     private lateinit var next: LinearLayout
+    private var step2ViewModel: Step2ViewModel? = null
+    private var binding: FragmentCreateAMissionStep2Binding? = null
+    private var loadingDialog: LottieLoadingDialog? = null
+    private var api: API? = null
+    var compositeDisposable = CompositeDisposable()
 
     interface Step2SuccessListener {
         fun onStep2Success()
@@ -51,7 +70,11 @@ class CreateAMissionStep2 : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mView =  inflater.inflate(R.layout.fragment_create_a_mission_step2, container, false)
+         binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_create_a_mission_step2, container, false
+        )
+        mView = binding!!.getRoot()
+
         initView()
         return mView
     }
@@ -76,9 +99,48 @@ class CreateAMissionStep2 : Fragment(){
             launchInstructionsDialog()
         }
 
-        next.setOnClickListener {
-            step2SuccessListener.onStep2Success()
-        }
+
+        step2ViewModel = ViewModelProviders.of(this).get(Step2ViewModel::class.java)
+
+        binding!!.setLifecycleOwner(this)
+
+        binding!!.step2ViewModel = step2ViewModel
+
+        loadingDialog = LottieLoadingDialog(requireContext())
+
+        step2ViewModel!!.mission.observe(requireActivity(), Observer<Mission> { mission ->
+
+            loadingDialog!!.cancelLoadingDialog()
+            if (TextUtils.isEmpty(mission.step1)) {
+                binding!!.createAMissionStep2Step1.error = "Required"
+                binding!!.createAMissionStep2Step1.requestFocus()
+            } else if (TextUtils.isEmpty(mission.step2)) {
+                binding!!.createAMissionStep2Step2.error = "Required"
+                binding!!.createAMissionStep2Step2.requestFocus()
+            }
+            else if (TextUtils.isEmpty(mission.step3)) {
+                binding!!.createAMissionStep2Step3.error = "Required"
+                binding!!.createAMissionStep2Step3.requestFocus()
+            }
+            else if (!mission.isNetworkAvailable) {
+                Toast.makeText(requireContext(), "Network not available", Toast.LENGTH_LONG).show()
+            } else if (mission.isLoading) {
+                loadingDialog!!.showLoadingDialog()
+            } else if (mission.isSaved) {
+                step2SuccessListener.onStep2Success()
+
+            } else if (!mission.isSaved) {
+                Toast.makeText(requireContext(), "Error Occurred", Toast.LENGTH_LONG)
+                    .show()
+            }
+            else if (!mission.isError) {
+                Toast.makeText(requireContext(), "Error occurred please try again", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "Error Occurred please try again", Toast.LENGTH_LONG)
+                    .show()
+            }
+        })
+
     }
 
     private fun launchInstructionsDialog() {

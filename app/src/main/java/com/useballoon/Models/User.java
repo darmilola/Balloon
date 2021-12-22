@@ -7,7 +7,7 @@ public class User {
     private String firstname;
 
     @SerializedName("userid")
-    private String userId;
+    private int userId;
 
     @SerializedName("email")
     private String email;
@@ -15,14 +15,21 @@ public class User {
     @SerializedName("donereg")
     private int donereg;
 
-    public User(String firstname, String userId, String email, int donereg){
+    public User(String firstname, int userId, String email, int donereg){
            this.firstname = firstname;
            this.userId = userId;
            this.email = email;
            this.donereg = donereg;
     }
 
-    public User(String email){
+    public User(String email, int userId)
+    {
+        this.email = email;
+        this.userId = userId;
+    }
+
+    public User(String email)
+    {
         this.email = email;
     }
 
@@ -38,7 +45,7 @@ public class User {
         return email;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 

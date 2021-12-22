@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="step1ViewModel"
+            type="com.useballoon.viewModels.Step1ViewModel" />
+    </data>
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +49,9 @@
                 android:textSize="14dp"
                 android:paddingLeft="10dp"
                 android:maxLines="1"
+                android:text="@={step1ViewModel.subject}"
                 android:inputType="text"
+                android:id="@+id/create_mission_step1_subject"
                 android:background="@drawable/auth_edittext_background"/>
 
             <View
@@ -77,6 +88,8 @@
                 android:textSize="14dp"
                 android:paddingLeft="10dp"
                 android:maxLines="1"
+                android:text="@={step1ViewModel.url}"
+                android:id="@+id/create_mission_step1_url"
                 android:inputType="text"
                 android:background="@drawable/auth_edittext_background"/>
 
@@ -89,6 +102,7 @@
                 android:layout_marginBottom="20dp"
                 android:id="@+id/create_a_mission_step1_next"
                 android:layout_gravity="right"
+                android:onClick="@{(v) -> step1ViewModel.onClick(v)}"
                 android:background="@drawable/auth_edittext_background"
                 android:orientation="horizontal"
                 android:backgroundTint="@color/balloon_primary"
@@ -119,3 +133,5 @@
     </ScrollView>
 
 </LinearLayout>
+
+</layout>

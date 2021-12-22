@@ -5,6 +5,8 @@
     <string name="welcome_3_2">you can now proceed to create your first mission. The time is around</string>
     <string name="welcome_3_3">and there are a lot of Evangelists online right now - so don\'t wait, click on the \"Create a Mission\" button below and be on your way to making your music go viral on the internet.</string>
     <string name="saved_user_email">com.useballoon.email</string>
+    <string name="saved_user_id">com.useballoon.userid</string>
+    <string name="saved_mission_id">com.useballoon.missionid</string>
     <string name="welcome_3_1">Since all these are clear </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

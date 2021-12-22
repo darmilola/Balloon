@@ -1,30 +1,46 @@
 package com.useballoon.Ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
+import com.useballoon.Intro
+import com.useballoon.Models.LoginUser
+import com.useballoon.Models.Mission
+import com.useballoon.Retrofit.API
+import com.useballoon.Utils.LottieLoadingDialog
+import com.useballoon.databinding.ActivityLoginBinding
+import com.useballoon.databinding.FragmentCreateAMissionStep1Binding
+import com.useballoon.viewModels.LoginViewModel
+import com.useballoon.viewModels.Step1ViewModel
+import io.reactivex.disposables.CompositeDisposable
+import android.R.attr.data
+
+import android.R.attr
 import com.useballoon.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateAMissionStep1.newInstance] factory method to
- * create an instance of this fragment.
- */
+@Suppress("DEPRECATION")
 class CreateAMissionStep1 : Fragment() {
 
-    private lateinit var next: LinearLayout
     private lateinit var mView: View
     private lateinit var step1SuccessListener: Step1SuccessListener
+    private var step1ViewModel: Step1ViewModel? = null
+    private var binding: FragmentCreateAMissionStep1Binding? = null
+    private var loadingDialog: LottieLoadingDialog? = null
+    private var api: API? = null
+    var compositeDisposable = CompositeDisposable()
 
     interface Step1SuccessListener {
         fun onStep1Success()
@@ -40,15 +56,51 @@ class CreateAMissionStep1 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        mView =  inflater.inflate(R.layout.fragment_create_a_mission_step1, container, false)
+         binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_create_a_mission_step1, container, false
+        )
+        mView = binding!!.getRoot()
+
         initView()
         return mView
     }
 
     fun initView(){
-        next = mView.findViewById(R.id.create_a_mission_step1_next)
-        next.setOnClickListener { step1SuccessListener.onStep1Success() }
+        step1ViewModel = ViewModelProviders.of(this).get(Step1ViewModel::class.java)
+
+        binding!!.setLifecycleOwner(this)
+
+        binding!!.step1ViewModel = step1ViewModel
+
+        loadingDialog = LottieLoadingDialog(requireContext())
+
+        step1ViewModel!!.mission.observe(requireActivity(), Observer<Mission> { mission ->
+
+            loadingDialog!!.cancelLoadingDialog()
+            if (TextUtils.isEmpty(mission.subject)) {
+                binding!!.createMissionStep1Subject.error = "Required"
+                binding!!.createMissionStep1Subject.requestFocus()
+            } else if (TextUtils.isEmpty(mission.musicOrVideoUrl)) {
+                binding!!.createMissionStep1Url.error = "Required"
+                binding!!.createMissionStep1Url.requestFocus()
+            } else if (!mission.isNetworkAvailable) {
+                Toast.makeText(requireContext(), "Network not available", Toast.LENGTH_LONG).show()
+            } else if (mission.isLoading) {
+                loadingDialog!!.showLoadingDialog()
+            } else if (mission.isSaved) {
+                step1SuccessListener.onStep1Success()
+
+            } else if (!mission.isSaved) {
+                Toast.makeText(requireContext(), "Error Occurred", Toast.LENGTH_LONG)
+                    .show()
+            }
+            else if (!mission.isError) {
+                Toast.makeText(requireContext(), "Error occurred please try again", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "Error Occurred please try again", Toast.LENGTH_LONG)
+                    .show()
+            }
+        })
     }
 
 

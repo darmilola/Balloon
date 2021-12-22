@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="step3ViewModel"
+            type="com.useballoon.viewModels.Step3ViewModel" />
+    </data>
+
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
@@ -66,7 +75,9 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    android:text="1"
+                    android:hint="1"
+                    android:text="@={step3ViewModel.envangelistCount}"
+                    android:id="@+id/create_a_mission_step3_envangelist_count"
                     android:fontFamily="@font/groreg"
                     android:background="@drawable/inc_background"/>
 
@@ -119,7 +130,9 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:maxLines="1"
+                android:id="@+id/create_a_mission_step3_envangelist_compensation"
                 android:textSize="15dp"
+                android:text="@={step3ViewModel.compensationAmount}"
                 android:fontFamily="@font/groreg"
                 android:textColor="@color/black"
                 android:inputType="number"
@@ -160,7 +173,8 @@
                 android:paddingRight="20dp"
                 android:scrollbars="vertical"
                 android:lines="4"
-                android:id="@+id/step3_proof_of_execution"
+                android:text="@={step3ViewModel.proofOfExecution}"
+                android:id="@+id/create_a_mission_step3_envangelist_proof"
                 android:hint="Write something..."
                 android:textColor="@color/black"
                 android:textSize="14dp"
@@ -176,8 +190,9 @@
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
-                android:id="@+id/intro_create_a_mission"
+                android:id="@+id/create_a_mission_step3_send_mission"
                 android:layout_gravity="right"
+                android:onClick="@{(v) -> step3ViewModel.onClick(v)}"
                 android:background="@drawable/auth_edittext_background"
                 android:orientation="horizontal"
                 android:backgroundTint="@color/balloon_primary"
@@ -208,3 +223,5 @@
     </ScrollView>
 
 </LinearLayout>
+
+</layout>

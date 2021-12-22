@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -80,6 +81,10 @@ class Intro : AppCompatActivity() {
                       binding!!.introProgress.visibility = View.GONE
                       binding!!.introRoot.visibility = View.VISIBLE
                       userEmail = users[0].email
+                      val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                      val edit = preferences.edit()
+                      edit.putInt(getString(R.string.saved_user_id), users[0].userId)
+                      edit.apply()
                   }
                 else{
                       val intent = Intent(this@Intro, CreateAMission::class.java)
