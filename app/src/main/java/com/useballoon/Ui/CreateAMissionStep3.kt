@@ -31,9 +31,10 @@ import com.useballoon.databinding.FragmentCreateAMissionStep2Binding
 import com.useballoon.databinding.FragmentCreateAMissionStep3Binding
 import com.useballoon.viewModels.Step2ViewModel
 import com.useballoon.viewModels.Step3ViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION")@AndroidEntryPoint
 class CreateAMissionStep3 : Fragment() {
 
     private var mView: View? = null;
@@ -78,7 +79,7 @@ class CreateAMissionStep3 : Fragment() {
         importantInfo = mView!!.findViewById(R.id.create_mission_step3_important_info)
         executionSample = mView!!.findViewById(R.id.create_mission_step3_execution_sample)
 
-        binding!!.createAMissionStep3EnvangelistProof.setOnTouchListener(OnTouchListener { view, event -> // TODO Auto-generated method stub
+        binding!!.createAMissionStep3EnvangelistProof.setOnTouchListener(OnTouchListener { view, event ->
             view.parent.requestDisallowInterceptTouchEvent(true)
             when (event.action and MotionEvent.ACTION_MASK) {
                 MotionEvent.ACTION_UP -> view.parent.requestDisallowInterceptTouchEvent(false)

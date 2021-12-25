@@ -15,15 +15,21 @@ import androidx.lifecycle.ViewModelProviders
 import android.text.TextUtils
 import android.widget.Toast
 import com.useballoon.Models.SignupUser
+import com.useballoon.Retrofit.API
 import com.useballoon.Utils.LottieLoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.disposables.CompositeDisposable
+import retrofit2.Retrofit
 import java.util.*
+import javax.inject.Inject
 import kotlin.math.sign
 
-
+@AndroidEntryPoint
 class Signup : AppCompatActivity() {
+    @set:Inject
+    lateinit var loadingDialog: LottieLoadingDialog
     private var signupViewModel: SignupViewModel? = null
     private var binding: ActivitySignupBinding? = null
-    private var loadingDialog: LottieLoadingDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -31,7 +37,6 @@ class Signup : AppCompatActivity() {
 
     private fun initView(){
 
-        loadingDialog = LottieLoadingDialog(this)
         signupViewModel = ViewModelProviders.of(this).get(SignupViewModel::class.java)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)

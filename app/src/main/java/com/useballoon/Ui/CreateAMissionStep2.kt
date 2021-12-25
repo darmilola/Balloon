@@ -29,10 +29,11 @@ import com.useballoon.databinding.FragmentCreateAMissionStep1Binding
 import com.useballoon.databinding.FragmentCreateAMissionStep2Binding
 import com.useballoon.viewModels.Step1ViewModel
 import com.useballoon.viewModels.Step2ViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION")@AndroidEntryPoint
 class CreateAMissionStep2 : Fragment(){
     // TODO: Rename and change types of parameters
     private lateinit var mView: View

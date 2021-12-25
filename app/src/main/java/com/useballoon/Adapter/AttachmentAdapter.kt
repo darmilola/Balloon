@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -15,6 +16,7 @@ import android.widget.TextView
 
 import android.view.LayoutInflater
 import android.view.Window
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.button.MaterialButton
@@ -29,11 +31,32 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
     private val TYPE_VIDEO = 4
     private val TYPE_SELECT = 5
     private var context:Context? = null
+    var fileUploadClickListener:FileUploadClickListener? = null
     private var attachmentList: ArrayList<Attachments> = ArrayList()
+    val UPLOAD_URL = "https://glacial-spire-23584.herokuapp.com/public/api/artists/mission/upload"
+
+
+    //Pdf request code
+    private val PICK_PDF_REQUEST = 1
+
+    //storage permission code
+    private val STORAGE_PERMISSION_CODE = 123
+
+
+    //Uri to store the image uri
+    private val filePath: Uri? = null
+
+     interface FileUploadClickListener {
+        fun onFileUploadClicked()
+    }
 
     init {
         this.attachmentList = attachmentList
         this.context = context
+    }
+
+    public fun setFileUploadListener(fileUploadClickListener: FileUploadClickListener){
+           this.fileUploadClickListener = fileUploadClickListener
     }
 
 
@@ -73,6 +96,11 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        if(holder is TypeSelectViewholder){
+            holder.itemView.setOnClickListener {
+                fileUploadClickListener!!.onFileUploadClicked()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -140,6 +168,7 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
         }
     }
 
+
     class TypePDFViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         //var imageView: ImageView
         //var city: TextView
@@ -153,19 +182,19 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
             // occupation = ItemView.findViewById(R.id.type_main_occupation)
         }
     }
-    class TypeSelectViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+   class TypeSelectViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         //var imageView: ImageView
         //var city: TextView
         //var nameAge: TextView
         //var occupation: Chip
-        private lateinit var mDialog: Dialog
+        private var mDialog: Dialog
         private lateinit var upload: MaterialButton
         private lateinit var cancelDialog: ImageView
 
         init {
             mDialog = Dialog(ItemView.context, android.R.style.Theme_Dialog)
             ItemView.setOnClickListener {
-                launchUploadDialog()
+
             }
             // imageView = ItemView.findViewById(R.id.type_main_image)
             // city = ItemView.findViewById(R.id.type_main_city)
@@ -175,21 +204,24 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
 
         private fun launchUploadDialog() {
            // mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            var chooseFile: MaterialButton
+            var shortTitle: EditText
+            var fileName: TextView
             mDialog.setContentView(R.layout.create_mission_step2_upload)
             upload = mDialog.findViewById(R.id.create_mission_setp2_upload);
             cancelDialog = mDialog.findViewById(R.id.cancel_dialog_icon)
+            chooseFile = mDialog.findViewById(R.id.mission_choose_file)
+            shortTitle = mDialog.findViewById(R.id.mission_file_shorttitle)
+            fileName = mDialog.findViewById(R.id.mission_file_chosen_name)
             mDialog.setCanceledOnTouchOutside(true)
             mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             mDialog.show()
             upload.setOnClickListener {
                 mDialog.dismiss()
+
             }
-
-            cancelDialog.setOnClickListener { mDialog.dismiss() }
-
+            cancelDialog.setOnClickListener { mDialog.dismiss()   }
         }
     }
-
-
 
 }

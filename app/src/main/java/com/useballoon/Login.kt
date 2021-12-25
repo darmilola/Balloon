@@ -1,48 +1,47 @@
 package com.useballoon
 
 import android.app.AlertDialog
-import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.useballoon.Models.ActivateUser
 import com.useballoon.Models.LoginUser
 import com.useballoon.Models.ResponseStatus
-import com.useballoon.Models.SignupUser
 import com.useballoon.Retrofit.API
-import com.useballoon.Retrofit.RetrofitClient
 import com.useballoon.Utils.LottieLoadingDialog
 import com.useballoon.databinding.ActivityLoginBinding
-import com.useballoon.databinding.ActivitySignupBinding
 import com.useballoon.viewModels.LoginViewModel
-import com.useballoon.viewModels.SignupViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import java.sql.Timestamp
-import android.content.DialogInterface
-import android.preference.PreferenceManager
-import android.provider.Contacts
-import com.google.android.material.button.MaterialButton
+import javax.inject.Inject
 
 
-@Suppress("DEPRECATION")
+@AndroidEntryPoint
 class Login : AppCompatActivity() {
 
+    @set:Inject
+    lateinit var loadingDialog: LottieLoadingDialog
+    @set:Inject
+    lateinit var retrofit: Retrofit
+    @set:Inject
+    lateinit var api: API
+    @set:Inject
+    lateinit var compositeDisposable: CompositeDisposable
     private var loginViewModel: LoginViewModel? = null
     private var binding: ActivityLoginBinding? = null
-    private var loadingDialog: LottieLoadingDialog? = null
-    private var api: API? = null
-    var compositeDisposable = CompositeDisposable()
 
 
 
@@ -60,7 +59,7 @@ class Login : AppCompatActivity() {
 
         binding!!.loginViewModel = loginViewModel
 
-        loadingDialog = LottieLoadingDialog(this)
+        //loadingDialog = LottieLoadingDialog(this)
 
         val intent = intent
         if (intent?.getStringExtra("fromMain") == null) {
@@ -74,9 +73,6 @@ class Login : AppCompatActivity() {
 
             val timestamp = Timestamp(System.currentTimeMillis())
             val activateUser = ActivateUser(id, 1, timestamp.toString())
-            val retrofit = RetrofitClient.getInstance()
-            api = retrofit.create(API::class.java)
-
             compositeDisposable!!.add(api!!.activate(activateUser)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -160,4 +156,5 @@ class Login : AppCompatActivity() {
             })
             .show()
     }
+
 }

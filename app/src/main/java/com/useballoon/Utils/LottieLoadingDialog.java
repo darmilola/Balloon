@@ -9,15 +9,21 @@ import android.widget.TextView;
 
 import com.useballoon.R;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.qualifiers.ActivityContext;
+
 
 public class LottieLoadingDialog {
 
-    private Dialog loadingDialog;
-    private Context mContext;
 
-    public LottieLoadingDialog(Context context){
+     Dialog loadingDialog;
+     Context mContext;
+
+    @Inject
+    public LottieLoadingDialog(@ActivityContext Context context){
         this.mContext = context;
-        loadingDialog = new Dialog(mContext);
+        loadingDialog = new Dialog(context);
         loadingDialog.setContentView(R.layout.lottie_loading);
         loadingDialog.setCancelable(false);
         loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

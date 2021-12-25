@@ -29,9 +29,10 @@ import android.R.attr.data
 
 import android.R.attr
 import com.useballoon.R
+import dagger.hilt.android.AndroidEntryPoint
 
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION")@AndroidEntryPoint
 class CreateAMissionStep1 : Fragment() {
 
     private lateinit var mView: View

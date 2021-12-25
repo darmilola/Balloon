@@ -26,21 +26,31 @@ import com.useballoon.Utils.NetworkUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+import dagger.hilt.android.qualifiers.ActivityContext;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class IntroViewModel extends AndroidViewModel {
-    private API api;
-    private Retrofit retrofit;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+@HiltViewModel
+public class IntroViewModel extends ViewModel {
+    @Inject
+    API api;
+    @Inject
+    CompositeDisposable compositeDisposable;
+    @Inject
+    Retrofit retrofit;
     private MutableLiveData<IntroResponse> IntroMutableLiveData;
     private IntroResponse introResponse = new IntroResponse();
     private User user;
 
-    public IntroViewModel(@NonNull Application application) {
-        super(application);
+
+    @Inject
+    public IntroViewModel() {
     }
 
     public MutableLiveData<IntroResponse> getIntro() {
@@ -50,20 +60,18 @@ public class IntroViewModel extends AndroidViewModel {
         return IntroMutableLiveData;
     }
 
-    public void loadData() {
+    public void loadData(Context context) {
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
-        String mUserEmail = preferences.getString(getApplication().getString(R.string.saved_user_email), "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String mUserEmail = preferences.getString(context.getString(R.string.saved_user_email), "");
 
         user = new User(mUserEmail);
-        if (!NetworkUtils.isNetworkAvailable(getApplication())) {
+        if (!NetworkUtils.isNetworkAvailable(context)) {
             introResponse.setNetworkAvailable(false);
             IntroMutableLiveData.setValue(introResponse);
             return;
         }
 
-        Retrofit retrofit = RetrofitClient.getInstance();
-        api = retrofit.create(API.class);
         compositeDisposable.add(api.search(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,6 +1,7 @@
 package com.useballoon.viewModels;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -23,22 +24,34 @@ import com.useballoon.Retrofit.RetrofitClient;
 import com.useballoon.Signup;
 import com.useballoon.Utils.NetworkUtils;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class Step1ViewModel extends AndroidViewModel {
+@HiltViewModel
+public class Step1ViewModel extends ViewModel {
     public MutableLiveData<String> subject = new MutableLiveData<>();
     public MutableLiveData<String> url = new MutableLiveData<>();
     private MutableLiveData<Mission> userMutableLiveData;
-    private API api;
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    @Inject
+    API api;
+    @Inject
+    CompositeDisposable compositeDisposable;
+    @Inject
+    Retrofit retrofit;
     private Mission mission;
 
-    public Step1ViewModel(@NonNull Application application) {
-        super(application);
-    }
+
+
+
+    @Inject
+    public Step1ViewModel(){}
+
 
     public MutableLiveData<Mission> getMission() {
 
@@ -79,7 +92,7 @@ public class Step1ViewModel extends AndroidViewModel {
     public void onClick(View view) {
 
         String missionCodedId = generateCodedId();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
 
         int mUserId = preferences.getInt(view.getContext().getString(R.string.saved_user_id), 0);
         preferences.edit().putString(view.getContext().getString(R.string.saved_mission_id),missionCodedId).apply();
@@ -101,8 +114,6 @@ public class Step1ViewModel extends AndroidViewModel {
             mission.setLoading(true);
             userMutableLiveData.setValue(mission);
 
-            Retrofit retrofit = RetrofitClient.getInstance();
-            api = retrofit.create(API.class);
             compositeDisposable.add(api.createMission(mission)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

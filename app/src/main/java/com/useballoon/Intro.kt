@@ -23,6 +23,7 @@ import com.useballoon.Models.IntroResponse
 import com.useballoon.Models.User
 import com.useballoon.databinding.ActivityIntroBinding
 import com.useballoon.viewModels.IntroViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -35,7 +36,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION")@AndroidEntryPoint
 class Intro : AppCompatActivity() {
     private var introViewModel: IntroViewModel? = null
     private var binding: ActivityIntroBinding? = null
@@ -57,7 +58,7 @@ class Intro : AppCompatActivity() {
 
         binding!!.introViewModel = introViewModel
 
-        introViewModel!!.loadData()
+        introViewModel!!.loadData(this@Intro)
 
 
         introViewModel!!.intro.observe(this, Observer<IntroResponse> { introResponse ->

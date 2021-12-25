@@ -18,19 +18,33 @@ import com.useballoon.Retrofit.RetrofitClient;
 import com.useballoon.Signup;
 import com.useballoon.Utils.NetworkUtils;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
+
+@HiltViewModel
 public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     private MutableLiveData<LoginUser> userMutableLiveData;
-    private API api;
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    @Inject
+    API api;
+    @Inject
+    CompositeDisposable compositeDisposable;
     private LoginUser loginUser;
+    @Inject
+    Retrofit retrofit;
+
+            @Inject
+    public LoginViewModel(){
+
+    }
 
     public MutableLiveData<LoginUser> getUser() {
 
@@ -67,8 +81,7 @@ public class LoginViewModel extends ViewModel {
             loginUser.setIsLoading(true);
             userMutableLiveData.setValue(loginUser);
 
-            Retrofit retrofit = RetrofitClient.getInstance();
-            api = retrofit.create(API.class);
+
             compositeDisposable.add(api.login(loginUser)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

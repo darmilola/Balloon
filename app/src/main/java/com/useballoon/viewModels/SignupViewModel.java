@@ -6,30 +6,40 @@ import android.view.View;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.useballoon.Models.LoginUser;
 import com.useballoon.Models.ResponseStatus;
 import com.useballoon.Models.SignupUser;
 import com.useballoon.Retrofit.API;
 import com.useballoon.Retrofit.RetrofitClient;
 import com.useballoon.Utils.NetworkUtils;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
+@HiltViewModel
 public class SignupViewModel extends ViewModel {
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     public MutableLiveData<String> firstname = new MutableLiveData<>();
     public MutableLiveData<String> lastname = new MutableLiveData<>();
     public MutableLiveData<String> confirmPassword = new MutableLiveData<>();
-    public MutableLiveData<String> phonenumber = new MutableLiveData<>();
     private MutableLiveData<SignupUser> userMutableLiveData;
-    private API api;
-    private Retrofit retrofit;
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    @Inject
+    API api;
+    @Inject
+    CompositeDisposable compositeDisposable;
+    @Inject
+    Retrofit retrofit;
     private SignupUser signupUser;
+
+    @Inject
+    public SignupViewModel(){}
 
     public MutableLiveData<SignupUser> getUser() {
 
@@ -86,8 +96,6 @@ public class SignupViewModel extends ViewModel {
             userMutableLiveData.setValue(signupUser);
 
             SignupUser mSignupUser = new SignupUser(firstname.getValue(), lastname.getValue(), email.getValue(), password.getValue(),Integer.parseInt(generateKeynode()));
-            Retrofit retrofit = RetrofitClient.getInstance();
-            api = retrofit.create(API.class);
             compositeDisposable.add(api.signUp(mSignupUser)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

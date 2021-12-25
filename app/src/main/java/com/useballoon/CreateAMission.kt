@@ -12,9 +12,10 @@ import com.useballoon.Ui.CreateAMissionStep1
 import com.useballoon.Ui.CreateAMissionStep2
 import com.useballoon.Ui.CreateAMissionStep3
 import com.useballoon.Utils.NoSwipeViewPager
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION")@AndroidEntryPoint
 class CreateAMission : AppCompatActivity(), CreateAMissionStep1.Step1SuccessListener, CreateAMissionStep2.Step2SuccessListener  {
     var adapter = viewPagerAdapter(supportFragmentManager)
     var viewPager: NoSwipeViewPager? = null
