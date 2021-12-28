@@ -88,6 +88,11 @@ class Intro : AppCompatActivity() {
                       edit.apply()
                   }
                 else{
+                      userEmail = users[0].email
+                      val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                      val edit = preferences.edit()
+                      edit.putInt(getString(R.string.saved_user_id), users[0].userId)
+                      edit.apply()
                       val intent = Intent(this@Intro, CreateAMission::class.java)
                       startActivity(intent)
                       finish()

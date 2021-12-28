@@ -1,5 +1,6 @@
 package com.useballoon.Ui
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,28 +15,40 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
 import android.view.*
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
+import com.useballoon.Adapter.AttachmentAdapter.FileUploadClickListener
 import com.useballoon.Models.Mission
-import com.useballoon.Retrofit.API
 import com.useballoon.Utils.LottieLoadingDialog
-import com.useballoon.databinding.FragmentCreateAMissionStep1Binding
 import com.useballoon.databinding.FragmentCreateAMissionStep2Binding
-import com.useballoon.viewModels.Step1ViewModel
 import com.useballoon.viewModels.Step2ViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
+import android.content.Intent
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+
+import br.com.onimur.handlepathoz.HandlePathOz
+import br.com.onimur.handlepathoz.HandlePathOzListener
+import br.com.onimur.handlepathoz.model.PathOz
+import com.useballoon.Utils.FileUploadUtil
+import java.io.File
+import android.webkit.MimeTypeMap
+
+import android.content.ContentResolver
+import android.net.Uri
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @Suppress("DEPRECATION")@AndroidEntryPoint
-class CreateAMissionStep2 : Fragment(){
-    // TODO: Rename and change types of parameters
+class CreateAMissionStep2 : Fragment(), HandlePathOzListener.SingleUri {
+    private val REQUEST_SELECT_FILE = 0;
     private lateinit var mView: View
     private lateinit var attachmentAdapter: AttachmentAdapter
     private lateinit var layoutManger: GridLayoutManager
@@ -43,16 +56,19 @@ class CreateAMissionStep2 : Fragment(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var mDialog: Dialog
     private lateinit var instructions: TextView
+    lateinit var fileName: TextView
     private lateinit var iUndestand: MaterialButton
     private lateinit var upload: MaterialButton
+    private lateinit var file: File
     private var cancelDialog: ImageView? = null
     private lateinit var step2SuccessListener: Step2SuccessListener
     private lateinit var next: LinearLayout
     private var step2ViewModel: Step2ViewModel? = null
     private var binding: FragmentCreateAMissionStep2Binding? = null
-    private var loadingDialog: LottieLoadingDialog? = null
-    private var api: API? = null
-    var compositeDisposable = CompositeDisposable()
+    @Inject
+    lateinit var loadingDialog: LottieLoadingDialog
+    private lateinit var handlePathOz: HandlePathOz
+    private var fileType: String? = null
 
     interface Step2SuccessListener {
         fun onStep2Success()
@@ -81,23 +97,32 @@ class CreateAMissionStep2 : Fragment(){
     }
 
     private fun initView(){
-        val  attachment1 = Attachments(1,"")
-        val  attachment2 = Attachments(2,"")
-        val  attachment5 = Attachments(5,"")
-        attachmentList.add(attachment1)
-        attachmentList.add(attachment2)
-        attachmentList.add(attachment5)
 
+        var attachment = Attachments("select","",0,"",0)
+        attachmentList.add(attachment)
+
+        handlePathOz = HandlePathOz(requireContext(), this)
         next = mView.findViewById(R.id.create_a_mission_step2_next)
         recyclerView = mView.findViewById(R.id.step2_attachments_recyclerview)
         instructions = mView.findViewById(R.id.create_mission_setp2_instructions);
         layoutManger = GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
         attachmentAdapter = AttachmentAdapter(requireContext(),attachmentList)
+
+        attachmentAdapter.fileUploadClickListener = object : FileUploadClickListener {
+            override fun onFileUploadClicked() {
+                launchUploadDialog()
+            }
+        }
+
         recyclerView.adapter = attachmentAdapter
         recyclerView.layoutManager = layoutManger
 
         instructions.setOnClickListener {
-            launchInstructionsDialog()
+            //launchInstructionsDialog()
+            val intent = Intent()
+            intent.type = "application/pdf"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_SELECT_FILE)
         }
 
 
@@ -107,7 +132,6 @@ class CreateAMissionStep2 : Fragment(){
 
         binding!!.step2ViewModel = step2ViewModel
 
-        loadingDialog = LottieLoadingDialog(requireContext())
 
         step2ViewModel!!.mission.observe(requireActivity(), Observer<Mission> { mission ->
 
@@ -161,6 +185,117 @@ class CreateAMissionStep2 : Fragment(){
 
     }
 
+    private fun launchUploadDialog() {
+        // mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        var chooseFile: MaterialButton
+        var shortTitle: EditText
+        lateinit var mDialog: Dialog
+        lateinit var upload: MaterialButton
+        lateinit var cancelDialog: ImageView
+        mDialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+        mDialog.setContentView(R.layout.create_mission_step2_upload)
+        upload = mDialog.findViewById(R.id.create_mission_setp2_upload);
+        cancelDialog = mDialog.findViewById(R.id.cancel_dialog_icon)
+        chooseFile = mDialog.findViewById(R.id.mission_choose_file)
+        shortTitle = mDialog.findViewById(R.id.mission_file_shorttitle)
+        fileName = mDialog.findViewById(R.id.mission_file_chosen_name)
+        mDialog.setCanceledOnTouchOutside(true)
+        mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDialog.show()
 
+        upload.setOnClickListener {
+
+            if(shortTitle.text.contentEquals("",true)){
+                shortTitle.error = "Required"
+            }
+            else {
+
+                mDialog.dismiss()
+                val preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                val mUserId = preferences.getInt(getString(R.string.saved_user_id), 0)
+                val mMissionId = preferences.getString(getString(R.string.saved_mission_id), "")
+                var fileUploadUtil = FileUploadUtil(requireContext())
+
+
+
+                     fileUploadUtil.uploadFile(
+                        file,
+                        shortTitle.text.toString(),
+                        fileType,
+                        mMissionId,
+                        mUserId
+                    )
+                fileUploadUtil.setUploadListener {
+                    attachmentAdapter.addItem(it)
+                }
+
+            }
+
+
+
+        }
+
+
+        chooseFile.setOnClickListener {
+            val intent = Intent()
+           // val mimeTypes = arrayOf( "application/pdf","image/","audio/","video/")
+            intent.type = "*/*"
+           // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_SELECT_FILE)
+        }
+
+        cancelDialog.setOnClickListener {
+            mDialog.dismiss()
+
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if ((requestCode == REQUEST_SELECT_FILE) and (resultCode == Activity.RESULT_OK)) {
+            data?.data?.also { it ->
+                //set uri to handle
+                handlePathOz.getRealPath(it)
+                fileType = getMimeType(it)
+                //show Progress Loading
+            }
+        }
+    }
+
+    override fun onRequestHandlePathOz(pathOz: PathOz, tr: Throwable?) {
+
+        //Now you can work with real path:
+        Toast.makeText(requireContext(), "The real path is: ${pathOz.path} \n The type is: ${pathOz.type}", Toast.LENGTH_SHORT).show()
+         file = File(pathOz.path)
+         fileName.text = file.name
+        //Handle any Exception (Optional)
+        tr?.let {
+          //  Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getMimeType(uri: Uri): String? {
+        var mimeType: String? = null
+        mimeType = if (ContentResolver.SCHEME_CONTENT == uri.getScheme()) {
+            val cr: ContentResolver = requireContext().getContentResolver()
+            cr.getType(uri)
+        } else {
+            val fileExtension = MimeTypeMap.getFileExtensionFromUrl(
+                uri
+                    .toString()
+            )
+            MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                fileExtension.toLowerCase()
+            )
+        }
+        return mimeType
+    }
+
+    override fun onDestroy() {
+        handlePathOz.onDestroy()
+        super.onDestroy()
+    }
 
 }

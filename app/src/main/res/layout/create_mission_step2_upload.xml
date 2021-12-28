@@ -95,6 +95,9 @@
                             android:layout_marginLeft="4dp"
                             android:textColor="@color/light_text_color"
                             android:textSize="14dp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:inputType="text"
                             android:id="@+id/mission_file_chosen_name"
                             android:fontFamily="@font/gromed"/>
                     </LinearLayout>

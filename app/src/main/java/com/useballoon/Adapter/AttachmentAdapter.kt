@@ -109,17 +109,21 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (attachmentList[position].type === TYPE_IMAGE) {
+        return if (attachmentList[position].type.equals("png",true)) {
             TYPE_IMAGE
-        } else if (attachmentList[position].type === TYPE_MUSIC) {
+        }
+        else if (attachmentList[position].type.equals("jpg",true)) {
+            TYPE_IMAGE
+        }
+        else if (attachmentList[position].type.equals("mp3",true)) {
             TYPE_MUSIC
         }
-        else if (attachmentList[position].type === TYPE_PDF) {
+        else if (attachmentList[position].type.equals("pdf",true)) {
             TYPE_PDF
         }
-        else if (attachmentList[position].type === TYPE_VIDEO) {
+        else if (attachmentList[position].type.equals("mp4",true)) {
             TYPE_VIDEO
-        } else if (attachmentList[position].type === TYPE_SELECT) {
+        } else if (attachmentList[position].type === "select") {
             TYPE_SELECT
         } else {
             TYPE_IMAGE
@@ -187,12 +191,9 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
         //var city: TextView
         //var nameAge: TextView
         //var occupation: Chip
-        private var mDialog: Dialog
-        private lateinit var upload: MaterialButton
-        private lateinit var cancelDialog: ImageView
+
 
         init {
-            mDialog = Dialog(ItemView.context, android.R.style.Theme_Dialog)
             ItemView.setOnClickListener {
 
             }
@@ -202,26 +203,12 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
             // occupation = ItemView.findViewById(R.id.type_main_occupation)
         }
 
-        private fun launchUploadDialog() {
-           // mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            var chooseFile: MaterialButton
-            var shortTitle: EditText
-            var fileName: TextView
-            mDialog.setContentView(R.layout.create_mission_step2_upload)
-            upload = mDialog.findViewById(R.id.create_mission_setp2_upload);
-            cancelDialog = mDialog.findViewById(R.id.cancel_dialog_icon)
-            chooseFile = mDialog.findViewById(R.id.mission_choose_file)
-            shortTitle = mDialog.findViewById(R.id.mission_file_shorttitle)
-            fileName = mDialog.findViewById(R.id.mission_file_chosen_name)
-            mDialog.setCanceledOnTouchOutside(true)
-            mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            mDialog.show()
-            upload.setOnClickListener {
-                mDialog.dismiss()
 
-            }
-            cancelDialog.setOnClickListener { mDialog.dismiss()   }
-        }
+    }
+
+    fun addItem(attachment: Attachments){
+        attachmentList.add(attachment)
+        notifyDataSetChanged()
     }
 
 }

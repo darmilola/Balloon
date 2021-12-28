@@ -1,6 +1,7 @@
 package com.useballoon.Models;
 
 import com.google.gson.annotations.SerializedName;
+import com.useballoon.Utils.FileUploadUtil;
 
 public class LoginUser {
     @SerializedName("email")
@@ -61,4 +62,6 @@ public class LoginUser {
     public void setError(boolean error) {
         isError = error;
     }
+
+
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.useballoon.Adapter.AttachmentAdapter;
 import com.useballoon.Intro;
 import com.useballoon.Models.IntroResponse;
 import com.useballoon.Models.LoginUser;
@@ -47,6 +48,9 @@ public class IntroViewModel extends ViewModel {
     private MutableLiveData<IntroResponse> IntroMutableLiveData;
     private IntroResponse introResponse = new IntroResponse();
     private User user;
+
+
+
 
 
     @Inject

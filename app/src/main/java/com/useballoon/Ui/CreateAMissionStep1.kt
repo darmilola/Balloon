@@ -104,6 +104,4 @@ class CreateAMissionStep1 : Fragment() {
         })
     }
 
-
-
 }
