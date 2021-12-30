@@ -62,7 +62,7 @@ public class Step3ViewModel extends ViewModel {
         String missionId = preferences.getString(view.getContext().getString(R.string.saved_mission_id), "");
 
 
-        Toast.makeText(view.getContext(), missionId, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(view.getContext(), missionId, Toast.LENGTH_SHORT).show();
 
         mission = new Mission(envangelistCount.getValue(), compensationAmount.getValue(), proofOfExecution.getValue(), missionId, creatorId);
 

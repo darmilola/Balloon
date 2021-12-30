@@ -3,16 +3,19 @@ package com.useballoon.Ui
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.TextUtils
+import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import com.useballoon.R
 import android.view.MotionEvent
 
 
@@ -24,8 +27,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
+import com.useballoon.MissionCreationSuccess
 import com.useballoon.Models.Mission
+import com.useballoon.R
 import com.useballoon.Retrofit.API
+import com.useballoon.Signup
 import com.useballoon.Utils.LottieLoadingDialog
 import com.useballoon.databinding.FragmentCreateAMissionStep2Binding
 import com.useballoon.databinding.FragmentCreateAMissionStep3Binding
@@ -33,6 +39,7 @@ import com.useballoon.viewModels.Step2ViewModel
 import com.useballoon.viewModels.Step3ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
 @Suppress("DEPRECATION")@AndroidEntryPoint
 class CreateAMissionStep3 : Fragment() {
@@ -47,7 +54,8 @@ class CreateAMissionStep3 : Fragment() {
     private var cancelDialog: ImageView? = null
     private var step3ViewModel: Step3ViewModel? = null
     private var binding: FragmentCreateAMissionStep3Binding? = null
-    private var loadingDialog: LottieLoadingDialog? = null
+    @Inject
+    lateinit var loadingDialog: LottieLoadingDialog
     private var api: API? = null
     var compositeDisposable = CompositeDisposable()
 
@@ -76,8 +84,6 @@ class CreateAMissionStep3 : Fragment() {
 
         binding!!.step3ViewModel = step3ViewModel
 
-        importantInfo = mView!!.findViewById(R.id.create_mission_step3_important_info)
-        executionSample = mView!!.findViewById(R.id.create_mission_step3_execution_sample)
 
         binding!!.createAMissionStep3EnvangelistProof.setOnTouchListener(OnTouchListener { view, event ->
             view.parent.requestDisallowInterceptTouchEvent(true)
@@ -94,9 +100,12 @@ class CreateAMissionStep3 : Fragment() {
             if (TextUtils.isEmpty(mission.compensationFee)) {
                 binding!!.createAMissionStep3EnvangelistCompensation.error = "Required"
                 binding!!.createAMissionStep3EnvangelistCompensation.requestFocus()
-            } else if (TextUtils.isEmpty(mission.step2)) {
-                binding!!.createAMissionStep3EnvangelistCompensation.error = "Required"
-                binding!!.createAMissionStep3EnvangelistCompensation.requestFocus()
+            }
+            else if (mission.compensationFee.toInt() < 2000) {
+                Toast.makeText(requireContext(), "Compensation fee too low minimum 2000", Toast.LENGTH_LONG).show()
+            }
+            else if (mission.envangelistCount == null || mission.envangelistCount.toInt() == 0) {
+                Toast.makeText(requireContext(), "Envangelists too low", Toast.LENGTH_LONG).show()
             }
             else if (TextUtils.isEmpty(mission.proofOfExecution)) {
                 binding!!.createAMissionStep3EnvangelistProof.error = "Required"
@@ -107,7 +116,8 @@ class CreateAMissionStep3 : Fragment() {
             } else if (mission.isLoading) {
                 loadingDialog!!.showLoadingDialog()
             } else if (mission.isSaved) {
-                   showAlert()
+                   startActivity(Intent(requireContext(), MissionCreationSuccess::class.java))
+                   requireActivity().finish()
             } else if (!mission.isSaved) {
                 Toast.makeText(requireContext(), "Error Occurred", Toast.LENGTH_LONG)
                     .show()
@@ -129,7 +139,55 @@ class CreateAMissionStep3 : Fragment() {
             LaunchImportantInfo()
         }
 
+
+        binding!!.step3EnvangelistIncrease.setOnClickListener {
+            var currentCountText = binding!!.createAMissionStep3EnvangelistCount.text
+            if(currentCountText.contentEquals("",true)){
+                currentCountText = "0"
+            }
+            var currentCount = currentCountText.toString().toInt()
+            var increment = currentCount + 1
+            var incrementedText = increment.toString()
+            binding!!.createAMissionStep3EnvangelistCount.text = incrementedText
+
+            val hiringBuilder = StringBuilder()
+            hiringBuilder.append("You are hiring ")
+                .append(incrementedText)
+                .append(" Evangelist(s)")
+            binding!!.step3EnvangelistHiringText.text = hiringBuilder.toString()
+        }
+
+
+
+        binding!!.step3EnvangelistDecrease.setOnClickListener {
+            var currentCountText = binding!!.createAMissionStep3EnvangelistCount.text
+            if(currentCountText.contentEquals("",true)){
+                currentCountText = "0"
+            }
+            var currentCount = currentCountText.toString().toInt()
+            if(currentCount == 0){
+
+            }
+            else {
+                var decrement = currentCount - 1
+                var decrementedText = decrement.toString()
+                binding!!.createAMissionStep3EnvangelistCount.text = decrementedText
+                val hiringBuilder = StringBuilder()
+                hiringBuilder.append("You are hiring ")
+                    .append(decrementedText)
+                    .append(" Evangelist(s)")
+                binding!!.step3EnvangelistHiringText.text = hiringBuilder.toString()
+            }
+        }
+
+        val recommendation =
+            SpannableString(getString(R.string.recommendation))
+        recommendation.setSpan(ForegroundColorSpan(Color.parseColor("#ff6633")),0,15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding!!.step3Recommendation.text = recommendation
+
+
     }
+
 
     private fun launchInstructionsDialog() {
         executionDialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
@@ -165,7 +223,6 @@ class CreateAMissionStep3 : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Mission Created")
             .setMessage("Your balloon mission has been created successfully, wait while it is approved") // Specifying a listener allows you to take an action before dismissing the dialog.
-            // The dialog is automatically dismissed when a dialog button is clicked.
             .setPositiveButton("Exit", DialogInterface.OnClickListener { dialog, which ->
                 dialog.dismiss()
             })

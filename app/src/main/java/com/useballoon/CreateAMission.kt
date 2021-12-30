@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -24,6 +25,7 @@ class CreateAMission : AppCompatActivity(), CreateAMissionStep1.Step1SuccessList
     var adapter = viewPagerAdapter(supportFragmentManager)
     var viewPager: NoSwipeViewPager? = null
     var backHome: LinearLayout? = null
+    var title: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_amission)
@@ -31,14 +33,17 @@ class CreateAMission : AppCompatActivity(), CreateAMissionStep1.Step1SuccessList
     }
 
     fun initView(){
-        viewPager = findViewById(R.id.create_mission_viewpager);
+        viewPager = findViewById(R.id.create_mission_viewpager)
+        title = findViewById(R.id.create_a_mission_title)
         setupViewPager(viewPager!!)
         backHome = findViewById(R.id.create_mission_back);
         backHome!!.setOnClickListener {
             if (viewPager!!.currentItem == 2) {
                 viewPager!!.setCurrentItem(1, true)
+                title!!.text = "Give Instructions - Step 2 of 3"
             } else if (viewPager!!.currentItem == 1) {
                 viewPager!!.setCurrentItem(0, true)
+                title!!.text = "Create a Mission - Step 1 of 3"
             } else {
                 startActivity(Intent(this@CreateAMission, MainActivity::class.java))
             }
@@ -83,10 +88,12 @@ class CreateAMission : AppCompatActivity(), CreateAMissionStep1.Step1SuccessList
 
     override fun onStep1Success() {
         viewPager!!.setCurrentItem(1,true)
+        title!!.text = "Give Instructions - Step 2 of 3"
     }
 
     override fun onStep2Success() {
         viewPager!!.setCurrentItem(2,true)
+        title!!.text = "Final Step - Step 3 of 3"
     }
 
 

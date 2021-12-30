@@ -47,7 +47,6 @@ public class Step2ViewModel extends ViewModel {
 
     @Inject
     public Step2ViewModel(){
-
     }
 
     public MutableLiveData<Mission> getMission() {
@@ -67,7 +66,6 @@ public class Step2ViewModel extends ViewModel {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
         int creatorId = preferences.getInt(view.getContext().getString(R.string.saved_user_id), 0);
         String missionId = preferences.getString(view.getContext().getString(R.string.saved_mission_id), "");
-
 
         Toast.makeText(view.getContext(), missionId, Toast.LENGTH_SHORT).show();
 

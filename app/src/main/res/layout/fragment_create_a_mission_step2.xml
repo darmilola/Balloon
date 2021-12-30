@@ -69,10 +69,19 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/light_text_color"
                 android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/groreg"
+                android:text="Tell your Evangelists how you want them to promote your music. Tell them in a step-by-step format."/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/balloon_primary"
+                android:textSize="15dp"
                 android:id="@+id/create_mission_setp2_instructions"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/groreg"
-                android:text="Tell your Evangelists how you want them to promote your music. Tell them in a step-by-step format. Look at an example »"/>
+                android:text="Look at an example »"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

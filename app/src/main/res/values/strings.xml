@@ -6,8 +6,10 @@
     <string name="welcome_3_3">and there are a lot of Evangelists online right now - so don\'t wait, click on the \"Create a Mission\" button below and be on your way to making your music go viral on the internet.</string>
     <string name="saved_user_email">com.useballoon.email</string>
     <string name="saved_user_id">com.useballoon.userid</string>
+    <string name="saved_user_firstname">com.useballoon.firstname</string>
     <string name="saved_mission_id">com.useballoon.missionid</string>
     <string name="welcome_3_1">Since all these are clear </string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommendation">Recommendation: Since this is your first mission, we recommend that you hire just 1 Evangelist first so you can fully understand how everything works and then later on, you can hire as much as possible.</string>
+
 </resources>

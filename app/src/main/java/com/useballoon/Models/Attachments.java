@@ -13,13 +13,16 @@ public class Attachments {
     private String missionId;
     @SerializedName("missioncreator")
     private int missionCreator;
+    @SerializedName("shorttitle")
+    private String shortTitle;
 
-    public Attachments(String type, String attachmentUrl, int attachmentId, String missionId, int missionCreator){
+    public Attachments(String type, String attachmentUrl, int attachmentId, String missionId, int missionCreator, String shortTitle){
            this.type = type;
            this.attachmentUrl = attachmentUrl;
            this.attachmentId  = attachmentId;
            this.missionId = missionId;
            this.missionCreator = missionCreator;
+           this.shortTitle = shortTitle;
     }
 
     public String getType() {
@@ -40,5 +43,9 @@ public class Attachments {
 
     public int getMissionCreator() {
         return missionCreator;
+    }
+
+    public String getShortTitle() {
+        return shortTitle;
     }
 }

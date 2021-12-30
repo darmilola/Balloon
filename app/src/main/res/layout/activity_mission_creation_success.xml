@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:backgroundTint="@color/special_activity_background"
+    tools:context=".MissionCreationSuccess">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            app:tint="@color/light_text_color"
+            android:id="@+id/mission_success_back"
+            android:src="@drawable/_781857_arrow_arrows_back_direction_left_icon"/>
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="...And off it goes."
+                android:gravity="center"
+                android:textSize="25dp"
+                android:fontFamily="@font/gromed"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:id="@+id/mission_success_well_done"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/groreg"
+                android:text="Well-done Times, your mission has been sent out for a review, and as soon as it is approved, it will be immediately sent out to Balloon Evangelists who can then apply to execute your mission."/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="What Happens Next:"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/gromed"
+                android:textColor="@color/balloon_primary"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/importime"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/groreg"
+                android:text="Pay attention to your email notifications. You will be notified when 1 Evangelist(s) have applied to execute your mission. Simply accept them and they can get started. Easy. Simply pay attention to your email notifications."/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/light_text_color"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_text_color"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/groreg"
+                android:text="You can also update your profile pending the time your Evangelists apply for your mission. Evangelists on Balloon are more likely to apply to execute your mission when you add your picture and stage name (your nickname)"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:text="Update Profile"
+                android:fontFamily="@font/grobold"
+                android:letterSpacing="0.005"
+                android:backgroundTint="#00a400"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/create_mission_setp2_upload"
+                android:textAllCaps="false"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

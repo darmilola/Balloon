@@ -16,6 +16,8 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_login.xml" value="0.12" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_login_or_signup.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_main3.xml" value="0.2" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_mission_creation_success.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_second_welcome.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_signup.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
@@ -26,6 +28,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/fragment_create_a_mission_step1.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/fragment_create_a_mission_step2.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/fragment_create_a_mission_step3.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/image_upload_item.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/image_upload_item_type_music.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/image_upload_item_type_pdf.xml" value="0.5" />
@@ -33,10 +36,14 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/lottie_loading.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/number_picker_custom_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/step2_example_dialog.xml" value="0.25" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_item_type_image.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_item_type_image.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_item_type_music.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_item_type_pdf.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_item_type_select.xml" value="0.5" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_item_type_video.xml" value="0.17592592592592593" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/upload_progressbar_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/layout/view_attachment_layout.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Balloon/app/src/main/res/menu/main_menu.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/user/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/preference_category.xml" value="0.1" />
       </map>
     </option>

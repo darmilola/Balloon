@@ -77,23 +77,22 @@ class Intro : AppCompatActivity() {
             }
             else if (introResponse.status.equals("success",true)){
                   users = introResponse.data
+                val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                val edit = preferences.edit()
+                edit.putInt(getString(R.string.saved_user_id), users[0].userId)
+                edit.putString(getString(R.string.saved_user_firstname), users[0].firstname)
+                edit.apply()
                   if(users[0].donereg == 0){
                       BuildWelcomeString(users[0].firstname)
                       binding!!.introProgress.visibility = View.GONE
                       binding!!.introRoot.visibility = View.VISIBLE
                       userEmail = users[0].email
-                      val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-                      val edit = preferences.edit()
-                      edit.putInt(getString(R.string.saved_user_id), users[0].userId)
-                      edit.apply()
+
                   }
                 else{
                       userEmail = users[0].email
-                      val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-                      val edit = preferences.edit()
-                      edit.putInt(getString(R.string.saved_user_id), users[0].userId)
-                      edit.apply()
-                      val intent = Intent(this@Intro, CreateAMission::class.java)
+
+                      val intent = Intent(this@Intro, MainActivity::class.java)
                       startActivity(intent)
                       finish()
                 }

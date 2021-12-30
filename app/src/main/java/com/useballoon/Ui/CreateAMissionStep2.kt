@@ -20,7 +20,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
-import com.useballoon.Adapter.AttachmentAdapter.FileUploadClickListener
 import com.useballoon.Models.Mission
 import com.useballoon.Utils.LottieLoadingDialog
 import com.useballoon.databinding.FragmentCreateAMissionStep2Binding
@@ -40,7 +39,10 @@ import android.webkit.MimeTypeMap
 
 import android.content.ContentResolver
 import android.net.Uri
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.lifecycle.lifecycleScope
+import com.useballoon.Interfaces.FileUploadClickListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -98,13 +100,11 @@ class CreateAMissionStep2 : Fragment(), HandlePathOzListener.SingleUri {
 
     private fun initView(){
 
-        var attachment = Attachments("select","",0,"",0)
+        var attachment = Attachments("select","",0,"",0,"")
         attachmentList.add(attachment)
-
         handlePathOz = HandlePathOz(requireContext(), this)
-        next = mView.findViewById(R.id.create_a_mission_step2_next)
-        recyclerView = mView.findViewById(R.id.step2_attachments_recyclerview)
-        instructions = mView.findViewById(R.id.create_mission_setp2_instructions);
+
+
         layoutManger = GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,false)
         attachmentAdapter = AttachmentAdapter(requireContext(),attachmentList)
 
@@ -114,15 +114,15 @@ class CreateAMissionStep2 : Fragment(), HandlePathOzListener.SingleUri {
             }
         }
 
-        recyclerView.adapter = attachmentAdapter
-        recyclerView.layoutManager = layoutManger
+        attachmentAdapter.setAttachmentViewClickedlistener{
+              launchViewDialog(it)
+        }
 
-        instructions.setOnClickListener {
-            //launchInstructionsDialog()
-            val intent = Intent()
-            intent.type = "application/pdf"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_SELECT_FILE)
+        binding!!.step2AttachmentsRecyclerview.adapter = attachmentAdapter
+        binding!!.step2AttachmentsRecyclerview.layoutManager = layoutManger
+
+        binding!!.createMissionSetp2Instructions.setOnClickListener {
+            launchInstructionsDialog()
         }
 
 
@@ -185,8 +185,46 @@ class CreateAMissionStep2 : Fragment(), HandlePathOzListener.SingleUri {
 
     }
 
+    private fun launchViewDialog(url: String){
+        var mDialog: Dialog
+        var webView: WebView
+        var progressbar: ProgressBar
+        var close: ImageView
+        var progressLayout: LinearLayout
+        mDialog = Dialog(requireContext(), android.R.style.Theme_Dialog)
+        mDialog.setContentView(R.layout.view_attachment_layout)
+        webView = mDialog.findViewById(R.id.view_attachment_webview)
+        progressbar = mDialog.findViewById(R.id.view_attachment_progress)
+        close = mDialog.findViewById(R.id.view_attachment_close)
+        progressLayout = mDialog.findViewById(R.id.view_attachment_progress_layout)
+
+        webView.webViewClient = WebViewClient()
+
+        webView.settings.javaScriptEnabled = true
+
+        webView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView, url: String) {
+                progressbar.visibility = View.GONE
+                progressLayout.visibility = View.GONE
+                webView.visibility = View.VISIBLE
+                super.onPageFinished(view, url)
+            }
+
+        }
+        webView.loadUrl(url)
+
+        mDialog.setCanceledOnTouchOutside(true)
+        mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDialog.show()
+
+        close.setOnClickListener {
+            webView.destroy()
+            mDialog.dismiss()
+        }
+
+    }
+
     private fun launchUploadDialog() {
-        // mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         var chooseFile: MaterialButton
         var shortTitle: EditText
         lateinit var mDialog: Dialog

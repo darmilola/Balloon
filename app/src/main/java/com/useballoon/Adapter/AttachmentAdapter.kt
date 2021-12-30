@@ -18,8 +18,11 @@ import android.view.LayoutInflater
 import android.view.Window
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.material.button.MaterialButton
+import com.useballoon.Interfaces.AttachmentViewClickedListener
+import com.useballoon.Interfaces.FileUploadClickListener
 import com.useballoon.Models.Attachments
 import com.useballoon.R
 
@@ -31,24 +34,11 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
     private val TYPE_VIDEO = 4
     private val TYPE_SELECT = 5
     private var context:Context? = null
-    var fileUploadClickListener:FileUploadClickListener? = null
+    var fileUploadClickListener: FileUploadClickListener? = null
     private var attachmentList: ArrayList<Attachments> = ArrayList()
-    val UPLOAD_URL = "https://glacial-spire-23584.herokuapp.com/public/api/artists/mission/upload"
+    private lateinit var attachmentViewClickedListener: AttachmentViewClickedListener
 
 
-    //Pdf request code
-    private val PICK_PDF_REQUEST = 1
-
-    //storage permission code
-    private val STORAGE_PERMISSION_CODE = 123
-
-
-    //Uri to store the image uri
-    private val filePath: Uri? = null
-
-     interface FileUploadClickListener {
-        fun onFileUploadClicked()
-    }
 
     init {
         this.attachmentList = attachmentList
@@ -58,6 +48,11 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
     public fun setFileUploadListener(fileUploadClickListener: FileUploadClickListener){
            this.fileUploadClickListener = fileUploadClickListener
     }
+
+    public fun setAttachmentViewClickedlistener(attachmentViewClickedListener: AttachmentViewClickedListener){
+           this.attachmentViewClickedListener = attachmentViewClickedListener
+    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -95,10 +90,50 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+         var attachment = attachmentList[position]
         if(holder is TypeSelectViewholder){
             holder.itemView.setOnClickListener {
                 fileUploadClickListener!!.onFileUploadClicked()
+            }
+        }
+        if(holder is TypeImageViewholder){
+            holder.itemView.setOnClickListener {
+                attachmentViewClickedListener.onAttachmentClicked(attachment.attachmentUrl)
+            }
+            holder.attachmentName.text = attachment.shortTitle
+            holder.attachmentDelete.setOnClickListener {
+                attachmentList.remove(attachment)
+                notifyDataSetChanged()
+            }
+        }
+        if(holder is TypeVideoViewholder){
+            holder.itemView.setOnClickListener {
+                attachmentViewClickedListener.onAttachmentClicked(attachment.attachmentUrl)
+            }
+            holder.attachmentName.text = attachment.shortTitle
+            holder.attachmentDelete.setOnClickListener {
+                attachmentList.remove(attachment)
+                notifyDataSetChanged()
+            }
+        }
+        if(holder is TypePDFViewholder){
+            holder.itemView.setOnClickListener {
+                attachmentViewClickedListener.onAttachmentClicked(attachment.attachmentUrl)
+            }
+            holder.attachmentName.text = attachment.shortTitle
+            holder.attachmentDelete.setOnClickListener {
+                attachmentList.remove(attachment)
+                notifyDataSetChanged()
+            }
+        }
+        if(holder is TypeMusicViewholder){
+            holder.itemView.setOnClickListener {
+                attachmentViewClickedListener.onAttachmentClicked(attachment.attachmentUrl)
+            }
+            holder.attachmentName.text = attachment.shortTitle
+            holder.attachmentDelete.setOnClickListener {
+                attachmentList.remove(attachment)
+                notifyDataSetChanged()
             }
         }
     }
@@ -131,76 +166,54 @@ class AttachmentAdapter(context: Context, attachmentList: ArrayList<Attachments>
     }
 
     class TypeImageViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //var imageView: ImageView
-        //var city: TextView
-        //var nameAge: TextView
-        //var occupation: Chip
+         var attachmentName: TextView
+         var attachmentDelete: LinearLayout
 
         init {
-           // imageView = ItemView.findViewById(R.id.type_main_image)
-           // city = ItemView.findViewById(R.id.type_main_city)
-           // nameAge = ItemView.findViewById(R.id.type_main_name_age)
-           // occupation = ItemView.findViewById(R.id.type_main_occupation)
+           attachmentName = ItemView.findViewById(R.id.attachment_name)
+            attachmentDelete = ItemView.findViewById(R.id.attachment_delete)
         }
     }
 
     class TypeVideoViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //var imageView: ImageView
-        //var city: TextView
-        //var nameAge: TextView
-        //var occupation: Chip
+        var attachmentName: TextView
+        var attachmentDelete: LinearLayout
 
         init {
-            // imageView = ItemView.findViewById(R.id.type_main_image)
-            // city = ItemView.findViewById(R.id.type_main_city)
-            // nameAge = ItemView.findViewById(R.id.type_main_name_age)
-            // occupation = ItemView.findViewById(R.id.type_main_occupation)
+            attachmentName = ItemView.findViewById(R.id.attachment_name)
+            attachmentDelete = ItemView.findViewById(R.id.attachment_delete)
         }
     }
 
     class TypeMusicViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //var imageView: ImageView
-        //var city: TextView
-        //var nameAge: TextView
-        //var occupation: Chip
+        var attachmentName: TextView
+        var attachmentDelete: LinearLayout
 
         init {
-            // imageView = ItemView.findViewById(R.id.type_main_image)
-            // city = ItemView.findViewById(R.id.type_main_city)
-            // nameAge = ItemView.findViewById(R.id.type_main_name_age)
-            // occupation = ItemView.findViewById(R.id.type_main_occupation)
+            attachmentName = ItemView.findViewById(R.id.attachment_name)
+            attachmentDelete = ItemView.findViewById(R.id.attachment_delete)
         }
     }
 
 
     class TypePDFViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //var imageView: ImageView
-        //var city: TextView
-        //var nameAge: TextView
-        //var occupation: Chip
+        var attachmentName: TextView
+        var attachmentDelete: LinearLayout
 
         init {
-            // imageView = ItemView.findViewById(R.id.type_main_image)
-            // city = ItemView.findViewById(R.id.type_main_city)
-            // nameAge = ItemView.findViewById(R.id.type_main_name_age)
-            // occupation = ItemView.findViewById(R.id.type_main_occupation)
+            attachmentName = ItemView.findViewById(R.id.attachment_name)
+            attachmentDelete = ItemView.findViewById(R.id.attachment_delete)
         }
     }
    class TypeSelectViewholder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        //var imageView: ImageView
-        //var city: TextView
-        //var nameAge: TextView
-        //var occupation: Chip
+
 
 
         init {
             ItemView.setOnClickListener {
 
             }
-            // imageView = ItemView.findViewById(R.id.type_main_image)
-            // city = ItemView.findViewById(R.id.type_main_city)
-            // nameAge = ItemView.findViewById(R.id.type_main_name_age)
-            // occupation = ItemView.findViewById(R.id.type_main_occupation)
+
         }
 
 

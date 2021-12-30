@@ -72,6 +72,7 @@
                     android:textSize="20dp"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:id="@+id/create_a_mission_title"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/gromed"

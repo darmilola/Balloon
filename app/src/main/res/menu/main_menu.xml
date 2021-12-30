@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/_904661_building_dashboard_default_home_house_icon"
+        android:title="Dashboard"/>
+    <item
+        android:id="@+id/wallet"
+        android:icon="@drawable/_841419_wallet_money_payment_icon"
+        android:title="Wallet"/>
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/_90107_alarm_alert_bell_christmas_notification_icon"
+        android:title="Notification"/>
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/_853767_kashifarif_user_profile_person_account_icon"
+        android:title="Profile"/>
+</menu>
