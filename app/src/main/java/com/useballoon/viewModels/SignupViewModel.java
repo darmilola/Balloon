@@ -37,7 +37,6 @@ public class SignupViewModel extends ViewModel {
     @Inject
     Retrofit retrofit;
     private SignupUser signupUser;
-
     @Inject
     public SignupViewModel(){}
 

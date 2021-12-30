@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface API {
+
     @POST("users")
      Observable<ResponseStatus> signUp(@Body SignupUser signupUser);
 
@@ -30,4 +31,5 @@ public interface API {
 
     @POST("artists/mission/update")
     Observable<ResponseStatus> updateMission(@Body Mission mission);
+
 }

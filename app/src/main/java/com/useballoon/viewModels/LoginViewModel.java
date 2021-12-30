@@ -80,8 +80,6 @@ public class LoginViewModel extends ViewModel {
 
             loginUser.setIsLoading(true);
             userMutableLiveData.setValue(loginUser);
-
-
             compositeDisposable.add(api.login(loginUser)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
